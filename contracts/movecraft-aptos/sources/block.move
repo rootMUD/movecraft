@@ -1,5 +1,6 @@
 module movecraft::block {
     use aptos_framework::account::{Self, SignerCapability};
+    use aptos_framework::aptos_account;
     use aptos_framework::event;
     use aptos_framework::object;
     use aptos_framework::timestamp;
@@ -14,6 +15,16 @@ module movecraft::block {
     use std::string::{Self, String};
     // randomness
     use aptos_framework::randomness;
+    // coin
+    use aptos_framework::coin::Coin;
+    use aptos_framework::coin;
+    use aptos_framework::aptos_coin::AptosCoin;
+
+    // 404 coin
+    use movecraft::four_zero_four_coin::FourZeroFourCoin;
+
+    // vector
+    use std::vector;
 
     use movecraft::block_type;
 
@@ -23,6 +34,7 @@ module movecraft::block {
     const ENOT_BLOCK_OWNER: u64 = 3;
     const ENOT_VALID_BLOCK: u64 = 4;
     const ENOT_STACKABLE: u64 = 5;
+    const ENOT_AMOUNT_MATCH: u64=6;
 
     /// Movecraft constants
     const STATE_SEED: vector<u8> = b"movecraft_signer";
@@ -61,6 +73,10 @@ module movecraft::block {
         burn_ref: token::BurnRef,        
         property_mutator_ref: property_map::MutatorRef,        
     }
+
+    struct Treature has key{
+        coins: Coin<AptosCoin>
+    }
     
     // Movecraft events
     struct MintBlockEvents has drop, store {
@@ -92,6 +108,13 @@ module movecraft::block {
         // Create the resource account with admin account and provided SEED constant
         let (resource_account, signer_cap) = account::create_resource_account(admin, STATE_SEED);
 
+        move_to(
+            admin, 
+            Treature {
+                coins: coin::zero()
+            }
+
+        );
         move_to(&resource_account, State {
             signer_cap,
             last_block_id: 0,
@@ -111,8 +134,115 @@ module movecraft::block {
         );
     }
 
+    // like ERC404, transfer with the mint?
+
+    public entry fun transfer(creator: &signer, to: address, amount: u64, burn_ids: vector<u64>) acquires State, Block {
+        // transfer the coin
+        aptos_account::transfer_coins<FourZeroFourCoin>(creator, to, amount);
+        // check the amount
+        let burn_ids_length = vector::length(&burn_ids);
+        let amount_match = burn_ids_length >= amount;
+        assert!(amount_match, ENOT_AMOUNT_MATCH);
+        let i = 0;
+        while (i < burn_ids_length){
+            // burn from
+            burn_block(creator, *vector::borrow<u64>(&burn_ids, i));
+            // mint to
+            mint_to(creator, to);
+            i = i + 1;
+        }
+    }
+
+    // Mint block by randomlly type
+    public entry fun mint_to(creator: &signer, to: address) acquires State {
+        // paid for block
+        // let treature = borrow_global_mut<Treature>(@movecraft);
+        // let coin_new= coin::withdraw<AptosCoin>(creator, 10_000);
+        // coin::merge(&mut treature.coins, coin_new);
+        // for the mvp, there are 8 types for blocks
+        // range from begin to end-1
+        let type = randomness::u64_range(0, 2);
+        let block_type_name = string::utf8(block_type::name(type));
+
+        let resource_address = get_resource_address();
+        let state = borrow_global_mut<State>(resource_address);
+        let resource_account = account::create_signer_with_capability(&state.signer_cap);
+
+        let block_id = state.last_block_id + 1;
+        let token_name = string_utils::format2(&b"{} #{}", block_type_name, block_id);
+
+        let description = string::utf8(block_type::description(type));
+        let uri = string::utf8(block_type::uri(type));
+
+        let constructor_ref = token::create_named_token(
+            &resource_account,
+            string::utf8(BLOCK_COLLECTION_NAME),
+            description,
+            token_name,
+            option::none(),
+            uri,
+        );
+
+        // Generate mint, burn, transfer cap
+        let token_signer = object::generate_signer(&constructor_ref);
+        let mutator_ref = token::generate_mutator_ref(&constructor_ref);
+        let burn_ref = token::generate_burn_ref(&constructor_ref);
+        let transfer_ref = object::generate_transfer_ref(&constructor_ref);
+        let property_mutator_ref = property_map::generate_mutator_ref(&constructor_ref);
+
+        let properties = property_map::prepare_input(vector[], vector[], vector[]);
+        property_map::init(&constructor_ref, properties);
+        property_map::add_typed<u64>(
+            &property_mutator_ref,
+            string::utf8(BLOCK_ID_KEY),
+            block_id,
+        );
+        property_map::add_typed<u64>(
+            &property_mutator_ref,
+            string::utf8(BLOCK_TYPE_KEY),
+            type,
+        );
+        property_map::add_typed<u64>(
+            &property_mutator_ref,
+            string::utf8(BLOCK_COUNT_KEY),
+            1,
+        );
+
+        // Move block object into token signer
+        let block = Block {
+            mutator_ref,
+            burn_ref,
+            property_mutator_ref,
+        };
+
+        move_to(&token_signer, block);
+
+        // Move token to 'to'
+        object::transfer_with_ref(object::generate_linear_transfer_ref(&transfer_ref), to);
+
+        // Update last block id
+        let block_address = signer::address_of(&token_signer);
+        simple_map::add(&mut state.blocks, block_id, block_address);
+        state.last_block_id = block_id;
+
+        // Emit mint event
+        event::emit_event<MintBlockEvents>(
+            &mut state.mint_block_events,
+            MintBlockEvents {
+                name: token_name,
+                block_id,
+                creator: to,
+                event_timestamp: timestamp::now_seconds(),
+            },
+        );
+    }
+
     // Mint block by randomlly type
     public entry fun mint(creator: &signer) acquires State {
+        // paid for block
+        // let treature = borrow_global_mut<Treature>(@movecraft);
+        // let coin_new= coin::withdraw<AptosCoin>(creator, 10_000);
+        // coin::merge(&mut treature.coins, coin_new);
         // for the mvp, there are 8 types for blocks
         // range from begin to end-1
         let type = randomness::u64_range(0, 2);

@@ -11,4 +11,5 @@ AptosStdlib = { local = "../../framework/aptos-stdlib" }
 std = "0x1"
 aptos_std = "0x1"
 aptos_framework = "0x1"
+fzfc = "0x9fd2a8669de4c268ceac77bb61642540ac875feb2dd3791da388d1f56f0d3ce2"
 movecraft = "_"
