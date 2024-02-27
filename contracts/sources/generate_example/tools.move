@@ -23,7 +23,7 @@ module movecraft::tools {
     const STATE_SEED: vector<u8> = b"tools_signer";
     const TOOL_COLLECTION_NAME: vector<u8> = b"Tools";
     const TOOL_COLLECTION_DESCRIPTION: vector<u8> = b"Example Tools";
-    const TOOL_COLLECTION_URI: vector<u8> = b"https://relive.noncegeek.com/assets/tools.svg";
+    const TOOL_COLLECTION_URI: vector<u8> = b"tools.svg";
 
     // This function is only callable during publishing
     fun init_module(admin: &signer) {

@@ -43,7 +43,7 @@ module movecraft::block {
 
     const BLOCK_COLLECTION_NAME: vector<u8> = b"Block";
     const BLOCK_COLLECTION_DESCRIPTION: vector<u8> = b"Movecraft Block";
-    const BLOCK_COLLECTION_URI: vector<u8> = b"https://relive.noncegeek.com/assets/block.svg";
+    const BLOCK_COLLECTION_URI: vector<u8> = b"block.svg";
 
     const LOG_BLOCK_TYPE: u64 = 11;
     const PLANK_BLOCK_TYPE: u64 = 12;
