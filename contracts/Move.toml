@@ -6,10 +6,11 @@ version = '1.0.0'
 AptosFramework = { local = "../../framework/aptos-framework" }
 AptosTokenObjects = { local = "../../framework/aptos-token-objects" }
 AptosStdlib = { local = "../../framework/aptos-stdlib" }
+RMUDGameCoin = { local = "../rmud-game-coin" }
 
 [addresses]
 std = "0x1"
 aptos_std = "0x1"
 aptos_framework = "0x1"
-fzfc = "0x9fd2a8669de4c268ceac77bb61642540ac875feb2dd3791da388d1f56f0d3ce2"
+my_addr = "0x61b96051f553d767d7e6dfcc04b04c28d793c8af3d07d3a43b4e2f8f4ca04c9f"
 movecraft = "_"

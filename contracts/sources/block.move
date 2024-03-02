@@ -1,4 +1,4 @@
-module movecraft::block {
+module movecraft::test_block {
     use aptos_framework::account::{Self, SignerCapability};
     use aptos_framework::aptos_account;
     use aptos_framework::event;
@@ -21,12 +21,12 @@ module movecraft::block {
     use aptos_framework::aptos_coin::AptosCoin;
 
     // 404 coin
-    use movecraft::four_zero_four_coin::FourZeroFourCoin;
+    use my_addr::rmud_game_coin::RMUDGameCoin;
 
     // vector
     use std::vector;
 
-    use movecraft::block_type;
+    use movecraft::test_block_type;
 
     /// Movecraft error codes
     const ENOT_SIGNER_NOT_ADMIN: u64 = 1;
@@ -34,7 +34,8 @@ module movecraft::block {
     const ENOT_BLOCK_OWNER: u64 = 3;
     const ENOT_VALID_BLOCK: u64 = 4;
     const ENOT_STACKABLE: u64 = 5;
-    const ENOT_AMOUNT_MATCH: u64=6;
+    const ENOT_TYPEMATCH: u64 = 6;
+    const ENOT_AMOUNT_MATCH: u64= 7;
 
     /// Movecraft constants
     const STATE_SEED: vector<u8> = b"movecraft_signer";
@@ -138,7 +139,7 @@ module movecraft::block {
 
     public entry fun transfer(creator: &signer, to: address, amount: u64, burn_ids: vector<u64>) acquires State, Block {
         // transfer the coin
-        aptos_account::transfer_coins<FourZeroFourCoin>(creator, to, amount);
+        aptos_account::transfer_coins<RMUDGameCoin>(creator, to, amount);
         // check the amount
         let burn_ids_length = vector::length(&burn_ids);
         let amount_match = burn_ids_length >= amount;
@@ -155,24 +156,43 @@ module movecraft::block {
 
     // Mint block by randomlly type
     public entry fun mint_to(creator: &signer, to: address) acquires State {
-        // paid for block
-        // let treature = borrow_global_mut<Treature>(@movecraft);
-        // let coin_new= coin::withdraw<AptosCoin>(creator, 10_000);
-        // coin::merge(&mut treature.coins, coin_new);
+        // TODO: paid for block
         // for the mvp, there are 8 types for blocks
         // range from begin to end-1
-        let type = randomness::u64_range(0, 2);
-        let block_type_name = string::utf8(block_type::name(type));
+        let type = randomness::u64_range(0, 26);
+        let block_type: u64;
+
+        if(type >= 0 && type <= 3) {
+            block_type = 0;
+        } else if(type >= 4 && type <= 6) {
+            block_type = 1;
+        } else if(type >= 6 && type <= 9) {
+            block_type = 2;
+        } else if(type >= 9 && type <= 12) {
+            block_type = 3;
+        } else if(type >= 12 && type <= 15) {
+            block_type = 4;
+        } else if(type >= 15 && type <= 18) {
+            block_type = 5;
+        } else if(type >= 18 && type <= 21) {
+            block_type = 5;
+        } else if(type >= 21 && type <= 24) {
+            block_type = 6;
+        } else {
+            block_type = type;
+        };
+
+        let test_block_type_name = string::utf8(test_block_type::name(block_type));
 
         let resource_address = get_resource_address();
         let state = borrow_global_mut<State>(resource_address);
         let resource_account = account::create_signer_with_capability(&state.signer_cap);
 
         let block_id = state.last_block_id + 1;
-        let token_name = string_utils::format2(&b"{} #{}", block_type_name, block_id);
+        let token_name = string_utils::format2(&b"{} #{}", test_block_type_name, block_id);
 
-        let description = string::utf8(block_type::description(type));
-        let uri = string::utf8(block_type::uri(type));
+        let description = string::utf8(test_block_type::description(block_type));
+        let uri = string::utf8(test_block_type::uri(block_type));
 
         let constructor_ref = token::create_named_token(
             &resource_account,
@@ -200,7 +220,8 @@ module movecraft::block {
         property_map::add_typed<u64>(
             &property_mutator_ref,
             string::utf8(BLOCK_TYPE_KEY),
-            type,
+            block_type,
+            // block type here.
         );
         property_map::add_typed<u64>(
             &property_mutator_ref,
@@ -245,18 +266,40 @@ module movecraft::block {
         // coin::merge(&mut treature.coins, coin_new);
         // for the mvp, there are 8 types for blocks
         // range from begin to end-1
-        let type = randomness::u64_range(0, 2);
-        let block_type_name = string::utf8(block_type::name(type));
+        let type = randomness::u64_range(0, 26);
+        let block_type: u64;
+
+        if(type >= 0 && type <= 3) {
+            block_type = 0;
+        } else if(type >= 4 && type <= 6) {
+            block_type = 1;
+        } else if(type >= 6 && type <= 9) {
+            block_type = 2;
+        } else if(type >= 9 && type <= 12) {
+            block_type = 3;
+        } else if(type >= 12 && type <= 15) {
+            block_type = 4;
+        } else if(type >= 15 && type <= 18) {
+            block_type = 5;
+        } else if(type >= 18 && type <= 21) {
+            block_type = 5;
+        } else if(type >= 21 && type <= 24) {
+            block_type = 6;
+        } else {
+            block_type = 7;
+        };
+
+        let test_block_type_name = string::utf8(test_block_type::name(block_type));
 
         let resource_address = get_resource_address();
         let state = borrow_global_mut<State>(resource_address);
         let resource_account = account::create_signer_with_capability(&state.signer_cap);
 
         let block_id = state.last_block_id + 1;
-        let token_name = string_utils::format2(&b"{} #{}", block_type_name, block_id);
+        let token_name = string_utils::format2(&b"{} #{}", test_block_type_name, block_id);
 
-        let description = string::utf8(block_type::description(type));
-        let uri = string::utf8(block_type::uri(type));
+        let description = string::utf8(test_block_type::description(block_type));
+        let uri = string::utf8(test_block_type::uri(block_type));
 
         let constructor_ref = token::create_named_token(
             &resource_account,
@@ -284,7 +327,8 @@ module movecraft::block {
         property_map::add_typed<u64>(
             &property_mutator_ref,
             string::utf8(BLOCK_TYPE_KEY),
-            type,
+            block_type, 
+            // block type here.
         );
         property_map::add_typed<u64>(
             &property_mutator_ref,
@@ -373,7 +417,7 @@ module movecraft::block {
         let (_block1_name, block1_type, block1_count, block1_stackable) = get_block_properties(block1_address);
         assert!(block1_stackable, ENOT_STACKABLE);
 
-        assert!(block1_type == block2_type, ENOT_STACKABLE);
+        assert!(block1_type == block2_type, ENOT_TYPEMATCH);
 
         // Update block count
         let block = borrow_global_mut<Block>(block1_address);
@@ -416,7 +460,7 @@ module movecraft::block {
         let name = token::name(block_token_object);
         let type = property_map::read_u64(&block_token_object, &string::utf8(BLOCK_TYPE_KEY));
         let count = property_map::read_u64(&block_token_object, &string::utf8(BLOCK_COUNT_KEY));
-        let stackable = block_type::is_stackable(type);
+        let stackable = test_block_type::is_stackable(type);
         (name, type, count, stackable)
     }
 

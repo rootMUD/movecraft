@@ -1,9 +1,17 @@
-module movecraft::cell_0 {
+module movecraft::test_cell_0 {
     // TODO: use struct for the values.
     const NAME: vector<u8> = b"Cell #0";
     const DESCRIPTION: vector<u8> = b"MoveCraft #0 Block";
     // const URI: vector<u8> = b"data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHdpZHRoPSIzMi4wMTUwNCIgaGVpZ2h0PSIzMi4wMTUwNCIgdmlld0JveD0iMCwwLDMyLjAxNTA0LDMyLjAxNTA0Ij48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMjIzLjk1NTkzLC0xNjMuOTU2MTYpIj48ZyBkYXRhLXBhcGVyLWRhdGE9InsmcXVvdDtpc1BhaW50aW5nTGF5ZXImcXVvdDs6dHJ1ZX0iIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0ibm9uemVybyIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjAuNSIgc3Ryb2tlLWxpbmVjYXA9ImJ1dHQiIHN0cm9rZS1saW5lam9pbj0ibWl0ZXIiIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIgc3Ryb2tlLWRhc2hhcnJheT0iIiBzdHJva2UtZGFzaG9mZnNldD0iMCIgc3R5bGU9Im1peC1ibGVuZC1tb2RlOiBub3JtYWwiPjxpbWFnZSB4PSIyMjMuODUwNzIiIHk9IjE2My44NzkxMyIgdHJhbnNmb3JtPSJzY2FsZSgxLjAwMDQ3LDEuMDAwNDcpIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHhsaW5rOmhyZWY9ImRhdGE6aW1hZ2UvcG5nO2Jhc2U2NCxpVkJPUncwS0dnb0FBQUFOU1VoRVVnQUFBQ0FBQUFBZ0NBWUFBQUJ6ZW5yMEFBQUJ1VWxFUVZSWVI4MVhxMDREUVJSbEVpQkxlUmphb0JBWUVoSVVLSEJJQkE2RlFOU2grUVUrQUluakowZ3dKRGdraW9RRWc2Z2lMWVpIczhId0dEZ2I1bXhQNzlEUW5ZNlo3ankyNTk1N3pyMTMzY1ZKODMzc2M3UTY3YTlKanNWNkk5akw4OXcvdDErZS9jejdmVi8yNi8vY3lBQUFZbGgyZVgzdmw3YldsZ0pqWUxGbFlXTm1OdkFRbnJNczgrdndlT0dCa1FGZ2NRR1dBREFzWW8rd0o3YzNWNElqMGdPVkF6allYZmNxNEZHclRWcGg3cm5mN2I3MXZjZnZkY2tCRENwRGhBcjY1OURkM0hWNnFvaTVNM0FlK0RjQXAwYzdBUWRpa1FNQXE0SUpZT1VObHh3QU9LQjBySFN1NUFvUHN1NlZORXFaa0RQaTBBRWM3bThFSExCMERJQXFUMWozUzNrZ09RREZBWTdaK2RXdFgxcGRydnRaOVFkOHp3cWg1RUJsQUZpR2lxMndHRlVPNTVUT1dRMUtOYVU4VURrQWNJQXRVL1grcitWYUdRVFBGUnhJQmdBeWhINVpwMHJYc2YyQ2RkOGxCeENiQjZ6eXEyS05hb2t1bTJ0RWRCNFlHb0N6NHoxZkM4REsyR3JHZ0dMekF6d0Z6N2prQUpnRFN1ZWMrOWtEc0l3N0pWVUxjTDdFZ2NvQmNEa0dzcW54Q2YvejhlazFJUGo4M0hTd2J2VUZyWWVmcitlRjcyOUY3aWVLUE1BeXFnckFCM0xxa1d4WXZNU3RBQUFBQUVsRlRrU3VRbUNDIiBkYXRhLXBhcGVyLWRhdGE9InsmcXVvdDtvcmlnUG9zJnF1b3Q7Om51bGx9Ii8+PC9nPjwvZz48L3N2Zz4=";
-    const URI: vector<u8> = b"cell_0.svg";
+    const URI: vector<u8> = b"ZSuRY-jNPllbaPAWKLfGUPRv-5_QCP8Rya2sskqfqyc";
+    // const URI: vector<u8> = b"m2FUu-9_-qFw91eM5ft9N07QyUJzrtiT7lCBhtvU5BA";
+    // const URI: vector<u8> = b"3z0hO8mspZ7uihEpAVoo7xbOrYIlKYwwtQKFvd0t11s";
+    // const URI: vector<u8> = b"h5PywMJR0_7TfGYjBcYHTtclpd1kP26XOM1m9VFIUQc";
+    // const URI: vector<u8> = b"Q4GjxhumU1s621b4F1rCWJkzIEpuMiS4KrRttuL3F-c";
+    // const URI: vector<u8> = b"5QPqZsLb9CbpHqIojZGNXf6QkLB5FGB4_qjbFGDEn4E";
+    // const URI: vector<u8> = b"NwWHZeliXk7UIwjUnCCw35vKEhBd8KTbd591jInMhRw";
+    // const URI: vector<u8> = b"tc9aNgx5OxcFoC9IuCadqnDUHIq1i036u2qgqdW77Pw";
+
     const BLOCK_TYPE: u64 = 0;
     const STACKABLE: bool = true;
     const MINTABLE: bool = true;
