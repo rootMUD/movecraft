@@ -1,8 +1,8 @@
-module movecraft::test_block {
+module movecraft::block {
     use aptos_framework::account::{Self, SignerCapability};
     use aptos_framework::aptos_account;
     use aptos_framework::event;
-    use aptos_framework::object;
+    use aptos_framework::object::{Self, ConstructorRef, Object};
     use aptos_framework::timestamp;
     use aptos_std::string_utils::{Self};
     use aptos_std::simple_map::{Self, SimpleMap};
@@ -26,7 +26,7 @@ module movecraft::test_block {
     // vector
     use std::vector;
 
-    use movecraft::test_block_type;
+    use movecraft::block_type;
 
     /// Movecraft error codes
     const ENOT_SIGNER_NOT_ADMIN: u64 = 1;
@@ -44,6 +44,7 @@ module movecraft::test_block {
 
     const BLOCK_COLLECTION_NAME: vector<u8> = b"Block";
     const BLOCK_COLLECTION_DESCRIPTION: vector<u8> = b"Movecraft Block";
+    // TODO: update the block collection uri.
     const BLOCK_COLLECTION_URI: vector<u8> = b"block.svg";
 
     const LOG_BLOCK_TYPE: u64 = 11;
@@ -70,6 +71,8 @@ module movecraft::test_block {
     }
 
     struct Block has key {
+        block_type: u64, 
+        block_num: u64, 
         mutator_ref: token::MutatorRef,
         burn_ref: token::BurnRef,        
         property_mutator_ref: property_map::MutatorRef,        
@@ -182,17 +185,17 @@ module movecraft::test_block {
             block_type = type;
         };
 
-        let test_block_type_name = string::utf8(test_block_type::name(block_type));
+        let block_type_name = string::utf8(block_type::name(block_type));
 
         let resource_address = get_resource_address();
         let state = borrow_global_mut<State>(resource_address);
         let resource_account = account::create_signer_with_capability(&state.signer_cap);
 
         let block_id = state.last_block_id + 1;
-        let token_name = string_utils::format2(&b"{} #{}", test_block_type_name, block_id);
+        let token_name = string_utils::format2(&b"{} #{}", block_type_name, block_id);
 
-        let description = string::utf8(test_block_type::description(block_type));
-        let uri = string::utf8(test_block_type::uri(block_type));
+        let description = string::utf8(block_type::description(block_type));
+        let uri = string::utf8(block_type::uri(block_type));
 
         let constructor_ref = token::create_named_token(
             &resource_account,
@@ -229,8 +232,11 @@ module movecraft::test_block {
             1,
         );
 
+        let block_num = 1;
         // Move block object into token signer
         let block = Block {
+            block_type, 
+            block_num, 
             mutator_ref,
             burn_ref,
             property_mutator_ref,
@@ -289,17 +295,17 @@ module movecraft::test_block {
             block_type = 7;
         };
 
-        let test_block_type_name = string::utf8(test_block_type::name(block_type));
+        let block_type_name = string::utf8(block_type::name(block_type));
 
         let resource_address = get_resource_address();
         let state = borrow_global_mut<State>(resource_address);
         let resource_account = account::create_signer_with_capability(&state.signer_cap);
 
         let block_id = state.last_block_id + 1;
-        let token_name = string_utils::format2(&b"{} #{}", test_block_type_name, block_id);
+        let token_name = string_utils::format2(&b"{} #{}", block_type_name, block_id);
 
-        let description = string::utf8(test_block_type::description(block_type));
-        let uri = string::utf8(test_block_type::uri(block_type));
+        let description = string::utf8(block_type::description(block_type));
+        let uri = string::utf8(block_type::uri(block_type));
 
         let constructor_ref = token::create_named_token(
             &resource_account,
@@ -335,9 +341,11 @@ module movecraft::test_block {
             string::utf8(BLOCK_COUNT_KEY),
             1,
         );
-
+        let block_num = 1;
         // Move block object into token signer
         let block = Block {
+            block_type, 
+            block_num, 
             mutator_ref,
             burn_ref,
             property_mutator_ref,
@@ -346,7 +354,7 @@ module movecraft::test_block {
         move_to(&token_signer, block);
 
         // Move token to creator
-        let creator_address = signer::address_of(creator);
+        let creator_address = address_of(creator);
         object::transfer_with_ref(object::generate_linear_transfer_ref(&transfer_ref), creator_address);
 
         // Update last block id
@@ -380,6 +388,8 @@ module movecraft::test_block {
 
         let block = move_from<Block>(block_address);
         let Block {
+            block_type: _, 
+            block_num: _, 
             burn_ref,
             mutator_ref: _,
             property_mutator_ref: _,
@@ -410,18 +420,21 @@ module movecraft::test_block {
 
         // Validate block stackable
         let block2_address = get_block_address(&state.blocks, owner_address, block_2_id);
-        let (_block2_name, block2_type, block2_count, block2_stackable) = get_block_properties(block2_address);
+        let (_block2_id, _block2_name, block2_type, block2_count, block2_stackable) = get_block_properties(block2_address);
         assert!(block2_stackable, ENOT_STACKABLE);
 
         let block1_address = get_block_address(&state.blocks, owner_address, block_1_id);
-        let (_block1_name, block1_type, block1_count, block1_stackable) = get_block_properties(block1_address);
+        let (_block1_id, _block1_name, block1_type, block1_count, block1_stackable) = get_block_properties(block1_address);
         assert!(block1_stackable, ENOT_STACKABLE);
 
         assert!(block1_type == block2_type, ENOT_TYPEMATCH);
 
-        // Update block count
+        // Update Block count
         let block = borrow_global_mut<Block>(block1_address);
+        // 1. Update block Property
         property_map::update_typed<u64>(&mut block.property_mutator_ref, &string::utf8(BLOCK_COUNT_KEY), block1_count + block2_count);
+        // 2. Update block_num in obj
+        block.block_num = block1_count + block2_count;
 
         // Emit stack event
         event::emit_event<StackBlockEvents>(
@@ -454,26 +467,28 @@ module movecraft::test_block {
         block_address
     }
 
-    fun get_block_properties(block_address: address): (String, u64, u64, bool) {
+    fun get_block_properties(block_address: address): (u64, String, u64, u64, bool) {
         let block_token_object = object::address_to_object<Block>(block_address);
 
         let name = token::name(block_token_object);
         let type = property_map::read_u64(&block_token_object, &string::utf8(BLOCK_TYPE_KEY));
         let count = property_map::read_u64(&block_token_object, &string::utf8(BLOCK_COUNT_KEY));
-        let stackable = test_block_type::is_stackable(type);
-        (name, type, count, stackable)
+        let id = property_map::read_u64(&block_token_object, &string::utf8(BLOCK_ID_KEY));
+        let stackable = block_type::is_stackable(type);
+        (id, name, type, count, stackable)
     }
 
     // Viewer functions
     #[view]
-    public fun get_block(block_id: u64): (String, u64, u64, bool) acquires State {
-        let resource_address = get_resource_address();
-        let state = borrow_global<State>(resource_address);
-        assert!(simple_map::contains_key(&state.blocks, &block_id), ENOT_VALID_BLOCK);
-
-        let block_address = *simple_map::borrow(&state.blocks, &block_id);
-        get_block_properties(block_address)
+    public fun get_block_properties_by_obj(block: Object<Block>): (u64, String, u64, u64, bool) {
+        let name = token::name(block);
+        let type = property_map::read_u64(&block, &string::utf8(BLOCK_TYPE_KEY));
+        let count = property_map::read_u64(&block, &string::utf8(BLOCK_COUNT_KEY));
+        let id = property_map::read_u64(&block, &string::utf8(BLOCK_ID_KEY));
+        let stackable = block_type::is_stackable(type);
+        (id, name, type, count, stackable)
     }
+
 
 
     // ==== TESTS ====

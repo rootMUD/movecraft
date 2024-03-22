@@ -2,11 +2,11 @@
 
 Here are the assets for `aptoscraft`.
 
-* `collection_uri.jpg`: the cover pic for collection.
+* `collection_uri.png`: the cover pic for collection.
 
 The resource on arweave: 
 
-> https://arweave.net/nA2X5vYk2i9yhfF8idqWT32xn1_erp-bsAh7Gdvpu7s
+> https://arweave.net/D5e_YVvj-SXio4DchGm2qfE9lwcS42pb7HlIo7Y7XfM
 
 * `cells`: the pic for cells, the style is ascii art, the format is `.svg`.
   * `cell_0`: https://arweave.net/7xopmyHOuhNtH2UXomaCt8m3FK42EzJ8Fb8MuGtXU58

@@ -1,0 +1,234 @@
+module movecraft::capy {
+    // <!-- doc
+    // a example to generate the capybara NFT by aptoscraft
+    // -->
+
+    use aptos_framework::account::{Self, SignerCapability};
+
+    use std::option::{Self, Option};
+    use std::signer;
+    use std::string::{Self, String};
+
+    use aptos_framework::object::{Self, ConstructorRef, Object};
+
+    use aptos_token_objects::collection;
+    use aptos_token_objects::token;
+
+    use aptos_token_objects::property_map;
+
+    // use block
+    use movecraft::block;
+    use movecraft::block::Block;
+
+    ///  To generate resource account
+    const STATE_SEED: vector<u8> = b"capy_signer";
+    
+    const COLLECTION_NAME: vector<u8> = b"CAPYBARA COLLECTION";
+    const COLLECTION_DESCRIPTION: vector<u8> = b"CAPYBARA: An Example Game for Aptoscraft!";
+    const COLLECTION_URI: vector<u8> = b"https://p.ipic.vip/9eytmd.jpg";
+    const URI_RED: vector<u8> = b"https://p.ipic.vip/9eytmd.jpg";
+    const URI_BLUE: vector<u8> = b"https://p.ipic.vip/9eytmd.jpg";
+    const URI_WHITE: vector<u8> = b"https://p.ipic.vip/9eytmd.jpg";
+    /// error code 
+    const ENOT_CREATOR: u64 = 1001;
+    const ENOT_FOLLOW_RULE: u64 = 2001;
+
+    /// Global state
+    struct State has key {
+        // the signer cap of the module's resource account
+        signer_cap: SignerCapability
+    }
+
+    #[resource_group_member(group = aptos_framework::object::ObjectGroup)]
+    struct Equipment has key {
+    }
+
+    #[resource_group_member(group = aptos_framework::object::ObjectGroup)]
+    struct Capy has key {
+        equipment: Option<Object<Equipment>>,
+        color: String, 
+        mutator_ref: token::MutatorRef, 
+        property_mutator_ref: property_map::MutatorRef, 
+    }
+
+    fun init_module(account: &signer) {
+        let (resource_account, signer_cap) = account::create_resource_account(account, STATE_SEED);
+        let collection = string::utf8(COLLECTION_NAME);
+        collection::create_unlimited_collection(
+            &resource_account,
+            string::utf8(COLLECTION_DESCRIPTION),
+            collection,
+            option::none(),
+            string::utf8(COLLECTION_URI),
+        );
+
+        move_to(account, State {
+            signer_cap
+        });
+    }
+
+    fun create(
+        _creator: &signer,
+        description: String,
+        name: String,
+        uri: String,
+    ): ConstructorRef acquires State {
+
+        let state = borrow_global_mut<State>(@movecraft);
+        let resource_account = account::create_signer_with_capability(&state.signer_cap); 
+        token::create_named_token(
+            &resource_account,
+            string::utf8(COLLECTION_DESCRIPTION), 
+            description,
+            name,
+            option::none(),
+            uri,
+        )
+    }
+
+    // Creation methods
+
+    public fun create_capy(
+        creator: &signer,
+        name: String,
+        description: String,
+        uri: String,
+        color: String,
+    ): Object<Capy> acquires State {
+
+        // generate resource acct
+        let state = borrow_global_mut<State>(@movecraft);
+        let resource_account = account::create_signer_with_capability(&state.signer_cap);
+
+        let constructor_ref = create(&resource_account, description, name, uri);
+        let token_signer = object::generate_signer(&constructor_ref);
+
+        // <-- create properties
+        let property_mutator_ref = property_map::generate_mutator_ref(&constructor_ref); 
+        let properties = property_map::prepare_input(vector[], vector[], vector[]);
+
+        property_map::init(&constructor_ref, properties);
+
+        property_map::add_typed<String>(
+            &property_mutator_ref,
+            string::utf8(b"equipment"),
+            string::utf8(b""),
+        );
+        property_map::add_typed<String>(
+            &property_mutator_ref,
+            string::utf8(b"color"),
+            color,
+        );
+        // create properties -->
+
+        let capy = Capy {
+            equipment: option::none(), 
+            color: color, 
+            mutator_ref: token::generate_mutator_ref(&constructor_ref),
+            property_mutator_ref,
+        };
+        move_to(&token_signer, capy);
+
+        // move to creator
+
+        let transfer_ref = object::generate_transfer_ref(&constructor_ref);
+        let creator_address = signer::address_of(creator);
+        object::transfer_with_ref(object::generate_linear_transfer_ref(&transfer_ref), creator_address);
+
+        object::address_to_object(signer::address_of(&token_signer))
+    }
+
+    // // Entry functions
+
+    // TODO: impl generate_capy by aptoscraft.
+    public entry fun generate_capy(
+        account: &signer, 
+        name: String, 
+        description: String, 
+        elements_1: Object<Block>, 
+        elements_2: Object<Block>) acquires State{
+        let uri = string::utf8(URI_RED);
+        // Rules now.
+        let (_name_1, type_1, count_1, _stackable_1) = block::get_block_properties_by_obj(elements_1);
+        let (_name_2, type_2, _count_2, _stackable_2) = block::get_block_properties_by_obj(elements_2);
+        
+        // one type 0 and one type 1 generate red.
+        // one type 2 and one type 3 generate blue.
+        // one type 4 and one type 5 generate yellow.
+        // two type 0 and one type 5 generate white.
+        if(type_1 == 0 && type_2 == 1){
+            create_capy(account, name, description, uri,  string::utf8(b"red"));
+        }else if(type_1 == 2 && type_2 == 3){
+            create_capy(account, name, description, uri,  string::utf8(b"blue"));
+        }else if(type_1 == 4 && type_2 == 5){
+            create_capy(account, name, description, uri,  string::utf8(b"yellow"));
+        }else if(type_1 == 0 && type_2 == 5  && (count_1 >= 2)){
+            create_capy(account, name, description, uri,  string::utf8(b"white"));
+        }else{
+            assert!(false, ENOT_FOLLOW_RULE);
+        };
+    }
+
+    public entry fun generate_capy_test(
+        account: &signer, 
+        name: String, 
+        description: String, 
+        elements_1: Object<Block>, 
+        elements_2: Object<Block>) {
+        let uri = string::utf8(URI_RED);
+        // Rules now.
+        let (_name_1, type_1, count_1, _stackable_1) = block::get_block_properties_by_obj(elements_1);
+        let (_name_2, type_2, _count_2, _stackable_2) = block::get_block_properties_by_obj(elements_2);
+        
+        // one type 0 and one type 1 generate red.
+        // one type 2 and one type 3 generate blue.
+        // one type 4 and one type 5 generate yellow.
+        // two type 0 and one type 5 generate white.
+        // if(type_1 == 0 && type_2 == 1){
+        //     create_capy(account, name, description, uri,  string::utf8(b"red"));
+        // }else if(type_1 == 2 && type_2 == 3){
+        //     create_capy(account, name, description, uri,  string::utf8(b"blue"));
+        // }else if(type_1 == 4 && type_2 == 5){
+        //     create_capy(account, name, description, uri,  string::utf8(b"yellow"));
+        // }else if(type_1 == 0 && type_2 == 5  && (count_1 >= 2)){
+        //     create_capy(account, name, description, uri,  string::utf8(b"white"));
+        // }else{
+        //     assert!(false, ENOT_FOLLOW_RULE);
+        // };
+    }
+
+    public entry fun mint_capy(
+        account: &signer, 
+        name: String, 
+        description: String) acquires State{
+        let uri = string::utf8(URI_RED);
+        create_capy(account, name, description, uri,  string::utf8(b"red"));
+    }
+
+    // View functions
+
+    #[view]
+    public fun view_capy(creator: address, collection: String, name: String): Capy acquires Capy {
+        let token_address = token::create_token_address(
+            &creator,
+            &collection,
+            &name,
+        );
+        move_from<Capy>(token_address)
+    }
+
+    #[view]
+    public fun view_capy_by_object(hero_obj: Object<Capy>): Capy acquires Capy {
+        let token_address = object::object_address(&hero_obj);
+        move_from<Capy>(token_address)
+    }
+
+    inline fun get_capy(creator: &address, collection: &String, name: &String): (Object<Capy>, &Capy) {
+        let token_address = token::create_token_address(
+            creator,
+            collection,
+            name,
+        );
+        (object::address_to_object<Capy>(token_address), borrow_global<Capy>(token_address))
+    }
+}
