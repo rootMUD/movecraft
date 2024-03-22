@@ -1,0 +1,51 @@
+{
+    "picUrls": [
+        "asset/image/picture/face/Nun.png"
+    ],
+    "oriMode": 1,
+    "autoFlip": true,
+    "refObjs": {},
+    "referenceMode": false,
+    "referenceID": 1,
+    "parts": [
+        {
+            "id": 0,
+            "showOnEditor": true,
+            "mouseEventEnabledInEditor": true
+        }
+    ],
+    "actionListArr": [
+        {
+            "id": 1,
+            "frameImageInfo": [
+                [
+                    {
+                        "picUrlIndex": 0,
+                        "rect": [
+                            0,
+                            0,
+                            400,
+                            400
+                        ],
+                        "x": -200,
+                        "y": -400,
+                        "width": 400,
+                        "height": 400,
+                        "rotation": 0,
+                        "alpha": 1,
+                        "hue": 0,
+                        "blur": 0,
+                        "tonal_r": 0,
+                        "tonal_g": 0,
+                        "tonal_b": 0,
+                        "tonal_gray": 0,
+                        "tonal_mr": 1,
+                        "tonal_mg": 1,
+                        "tonal_mb": 1
+                    }
+                ]
+            ]
+        }
+    ],
+    "id": 17
+}

@@ -1,0 +1,286 @@
+{
+    "picUrls": [
+        "asset/image/avatar/character/PixelCapybara.png"
+    ],
+    "oriMode": 3,
+    "autoFlip": true,
+    "refObjs": {},
+    "helperSetting": {},
+    "helperType": 0,
+    "referenceMode": false,
+    "referenceID": 1,
+    "parts": [
+        {
+            "id": 0,
+            "showOnEditor": true,
+            "mouseEventEnabledInEditor": true,
+            "__partImgIndex": 0
+        }
+    ],
+    "actionListArr": [
+        {
+            "id": 1,
+            "frameImageInfo": [
+                [
+                    {
+                        "picUrlIndex": 0,
+                        "rect": [
+                            0,
+                            0,
+                            320,
+                            300
+                        ],
+                        "x": -160,
+                        "y": -300,
+                        "width": 320,
+                        "height": 300,
+                        "rotation": 0,
+                        "alpha": 1,
+                        "hue": 0,
+                        "blur": 0,
+                        "tonal_r": 0,
+                        "tonal_g": 0,
+                        "tonal_b": 0,
+                        "tonal_gray": 0,
+                        "tonal_mr": 1,
+                        "tonal_mg": 1,
+                        "tonal_mb": 1
+                    }
+                ],
+                [
+                    {
+                        "picUrlIndex": 0,
+                        "rect": [
+                            0,
+                            0,
+                            320,
+                            300
+                        ],
+                        "x": -160,
+                        "y": -300,
+                        "width": 320,
+                        "height": 300,
+                        "rotation": 0,
+                        "alpha": 1,
+                        "hue": 0,
+                        "blur": 0,
+                        "tonal_r": 0,
+                        "tonal_g": 0,
+                        "tonal_b": 0,
+                        "tonal_gray": 0,
+                        "tonal_mr": 1,
+                        "tonal_mg": 1,
+                        "tonal_mb": 1
+                    }
+                ],
+                [
+                    {
+                        "picUrlIndex": 0,
+                        "rect": [
+                            0,
+                            0,
+                            320,
+                            300
+                        ],
+                        "x": -160,
+                        "y": -300,
+                        "width": 320,
+                        "height": 300,
+                        "rotation": 0,
+                        "alpha": 1,
+                        "hue": 0,
+                        "blur": 0,
+                        "tonal_r": 0,
+                        "tonal_g": 0,
+                        "tonal_b": 0,
+                        "tonal_gray": 0,
+                        "tonal_mr": 1,
+                        "tonal_mg": 1,
+                        "tonal_mb": 1
+                    }
+                ]
+            ]
+        },
+        {
+            "id": 2,
+            "frameImageInfo": [
+                [
+                    {
+                        "picUrlIndex": 0,
+                        "rect": [
+                            -640,
+                            0,
+                            320,
+                            300
+                        ],
+                        "x": -160,
+                        "y": -300,
+                        "width": 320,
+                        "height": 300,
+                        "rotation": 0,
+                        "alpha": 1,
+                        "hue": 0,
+                        "blur": 0,
+                        "tonal_r": 0,
+                        "tonal_g": 0,
+                        "tonal_b": 0,
+                        "tonal_gray": 0,
+                        "tonal_mr": 1,
+                        "tonal_mg": 1,
+                        "tonal_mb": 1,
+                        "isAnchor": false,
+                        "anchorX": 0,
+                        "anchorY": 0
+                    },
+                    {
+                        "picUrlIndex": 0,
+                        "rect": [
+                            -960,
+                            0,
+                            320,
+                            300
+                        ],
+                        "x": -160,
+                        "y": -300,
+                        "width": 320,
+                        "height": 300,
+                        "rotation": 0,
+                        "alpha": 1,
+                        "hue": 0,
+                        "blur": 0,
+                        "tonal_r": 0,
+                        "tonal_g": 0,
+                        "tonal_b": 0,
+                        "tonal_gray": 0,
+                        "tonal_mr": 1,
+                        "tonal_mg": 1,
+                        "tonal_mb": 1
+                    }
+                ],
+                [
+                    {
+                        "picUrlIndex": 0,
+                        "rect": [
+                            -640,
+                            0,
+                            320,
+                            300
+                        ],
+                        "x": -160,
+                        "y": -300,
+                        "width": 320,
+                        "height": 300,
+                        "rotation": 0,
+                        "alpha": 1,
+                        "hue": 0,
+                        "blur": 0,
+                        "tonal_r": 0,
+                        "tonal_g": 0,
+                        "tonal_b": 0,
+                        "tonal_gray": 0,
+                        "tonal_mr": 1,
+                        "tonal_mg": 1,
+                        "tonal_mb": 1,
+                        "isAnchor": false,
+                        "anchorX": 0,
+                        "anchorY": 0
+                    },
+                    {
+                        "picUrlIndex": 0,
+                        "rect": [
+                            -960,
+                            0,
+                            320,
+                            300
+                        ],
+                        "x": -160,
+                        "y": -300,
+                        "width": 320,
+                        "height": 300,
+                        "rotation": 0,
+                        "alpha": 1,
+                        "hue": 0,
+                        "blur": 0,
+                        "tonal_r": 0,
+                        "tonal_g": 0,
+                        "tonal_b": 0,
+                        "tonal_gray": 0,
+                        "tonal_mr": 1,
+                        "tonal_mg": 1,
+                        "tonal_mb": 1
+                    }
+                ],
+                [
+                    {
+                        "picUrlIndex": 0,
+                        "rect": [
+                            -640,
+                            0,
+                            320,
+                            300
+                        ],
+                        "x": -160,
+                        "y": -300,
+                        "width": 320,
+                        "height": 300,
+                        "rotation": 0,
+                        "alpha": 1,
+                        "hue": 0,
+                        "blur": 0,
+                        "tonal_r": 0,
+                        "tonal_g": 0,
+                        "tonal_b": 0,
+                        "tonal_gray": 0,
+                        "tonal_mr": 1,
+                        "tonal_mg": 1,
+                        "tonal_mb": 1,
+                        "isAnchor": false,
+                        "anchorX": 0,
+                        "anchorY": 0
+                    },
+                    {
+                        "picUrlIndex": 0,
+                        "rect": [
+                            -960,
+                            0,
+                            320,
+                            300
+                        ],
+                        "x": -160,
+                        "y": -300,
+                        "width": 320,
+                        "height": 300,
+                        "rotation": 0,
+                        "alpha": 1,
+                        "hue": 0,
+                        "blur": 0,
+                        "tonal_r": 0,
+                        "tonal_g": 0,
+                        "tonal_b": 0,
+                        "tonal_gray": 0,
+                        "tonal_mr": 1,
+                        "tonal_mg": 1,
+                        "tonal_mb": 1
+                    }
+                ]
+            ]
+        },
+        {
+            "id": 3,
+            "frameImageInfo": [
+                [],
+                [],
+                []
+            ]
+        },
+        {
+            "id": 7,
+            "frameImageInfo": [
+                [],
+                [],
+                []
+            ]
+        }
+    ],
+    "id": 1
+}

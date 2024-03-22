@@ -1,0 +1,193 @@
+{
+    "totalFrame": 25,
+    "imageSources": [
+        null,
+        {
+            "x": 0,
+            "y": 0,
+            "width": 440,
+            "height": 440,
+            "url": "asset/image/animation/skill/Fire_ball_release.png"
+        },
+        {
+            "x": -440,
+            "y": 0,
+            "width": 440,
+            "height": 440,
+            "url": "asset/image/animation/skill/Fire_ball_release.png"
+        },
+        {
+            "x": -880,
+            "y": 0,
+            "width": 440,
+            "height": 440,
+            "url": "asset/image/animation/skill/Fire_ball_release.png"
+        },
+        {
+            "x": -1320,
+            "y": 0,
+            "width": 440,
+            "height": 440,
+            "url": "asset/image/animation/skill/Fire_ball_release.png"
+        },
+        {
+            "x": -1760,
+            "y": 0,
+            "width": 440,
+            "height": 440,
+            "url": "asset/image/animation/skill/Fire_ball_release.png"
+        },
+        {
+            "x": -2200,
+            "y": 0,
+            "width": 440,
+            "height": 440,
+            "url": "asset/image/animation/skill/Fire_ball_release.png"
+        },
+        {
+            "x": -2640,
+            "y": 0,
+            "width": 440,
+            "height": 440,
+            "url": "asset/image/animation/skill/Fire_ball_release.png"
+        },
+        {
+            "x": -3080,
+            "y": 0,
+            "width": 440,
+            "height": 440,
+            "url": "asset/image/animation/skill/Fire_ball_release.png"
+        },
+        {
+            "x": -3520,
+            "y": 0,
+            "width": 440,
+            "height": 440,
+            "url": "asset/image/animation/skill/Fire_ball_release.png"
+        },
+        {
+            "x": 0,
+            "y": -440,
+            "width": 440,
+            "height": 440,
+            "url": "asset/image/animation/skill/Fire_ball_release.png"
+        }
+    ],
+    "layers": [
+        {
+            "type": 0,
+            "name": "[#GAME_THE_TARGET_LAYER]",
+            "children": [],
+            "frames": [
+                {
+                    "index": 0,
+                    "frameinterpolationEnabled": true,
+                    "x": 0,
+                    "y": 0,
+                    "rotation": 0,
+                    "alpha": 1,
+                    "scaleX": 1,
+                    "scaleY": 1,
+                    "materialData": [
+                        {
+                            "materials": []
+                        }
+                    ]
+                },
+                {
+                    "index": 24,
+                    "frameinterpolationEnabled": true,
+                    "x": 0,
+                    "y": 0,
+                    "rotation": 0,
+                    "alpha": 1,
+                    "scaleX": 1,
+                    "scaleY": 1,
+                    "materialData": [
+                        {
+                            "materials": []
+                        }
+                    ],
+                    "signalId": 0
+                }
+            ],
+            "isHitEffect": false,
+            "ishide": false,
+            "islock": false
+        },
+        {
+            "type": 1,
+            "name": "layer",
+            "children": [],
+            "frames": [
+                {
+                    "index": 0,
+                    "frameinterpolationEnabled": true,
+                    "materialData": [
+                        {
+                            "materials": []
+                        }
+                    ],
+                    "horizontalReversal": false,
+                    "x": -300,
+                    "y": -325,
+                    "rotation": 0,
+                    "alpha": 1,
+                    "width": 440,
+                    "height": 440,
+                    "imageSource": 1,
+                    "blendModeType": 0
+                },
+                {
+                    "index": 9,
+                    "frameinterpolationEnabled": true,
+                    "materialData": [
+                        {
+                            "materials": []
+                        }
+                    ],
+                    "horizontalReversal": false,
+                    "x": -300,
+                    "y": -325,
+                    "rotation": 0,
+                    "alpha": 1,
+                    "width": 440,
+                    "height": 440,
+                    "imageSource": 10,
+                    "blendModeType": 0,
+                    "signalId": 0
+                }
+            ],
+            "isHitEffect": false,
+            "ishide": false,
+            "islock": false
+        },
+        {
+            "type": 3,
+            "name": "[#GAME_SOUND_LAYER]",
+            "children": [],
+            "frames": [
+                {
+                    "index": 0,
+                    "frameinterpolationEnabled": true,
+                    "materialData": [
+                        {
+                            "materials": []
+                        }
+                    ]
+                }
+            ],
+            "isHitEffect": false,
+            "ishide": false,
+            "islock": false,
+            "audioInfo": {
+                "url": "asset/audio/se/battle/Fire_ball_release.ogg,1,1.5",
+                "volume": "1",
+                "pitch": "1.5"
+            }
+        }
+    ],
+    "isParticle": false,
+    "id": 19,
+    "particleData": null
+}

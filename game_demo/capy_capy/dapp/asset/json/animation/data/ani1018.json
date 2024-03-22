@@ -1,0 +1,96 @@
+{
+    "totalFrame": 5,
+    "imageSources": [
+        null
+    ],
+    "layers": [
+        {
+            "type": 0,
+            "name": "目标层",
+            "children": [],
+            "frames": [
+                {
+                    "index": 0,
+                    "x": 0,
+                    "y": 0,
+                    "rotation": 0,
+                    "alpha": 1,
+                    "scaleX": 1,
+                    "scaleY": 1,
+                    "materialData": [
+                        {
+                            "materials": []
+                        }
+                    ],
+                    "frameinterpolationEnabled": true
+                },
+                {
+                    "index": 1,
+                    "x": 0,
+                    "y": -5,
+                    "rotation": 0,
+                    "alpha": 1,
+                    "scaleX": 1,
+                    "scaleY": 1,
+                    "signalId": 0,
+                    "materialData": [
+                        {
+                            "materials": []
+                        }
+                    ]
+                },
+                {
+                    "index": 2,
+                    "x": 0,
+                    "y": 0,
+                    "rotation": 0,
+                    "alpha": 1,
+                    "scaleX": 1,
+                    "scaleY": 1,
+                    "signalId": 0,
+                    "materialData": [
+                        {
+                            "materials": []
+                        }
+                    ]
+                },
+                {
+                    "index": 3,
+                    "x": 0,
+                    "y": -5,
+                    "rotation": 0,
+                    "alpha": 1,
+                    "scaleX": 1,
+                    "scaleY": 1,
+                    "signalId": 0,
+                    "materialData": [
+                        {
+                            "materials": []
+                        }
+                    ]
+                },
+                {
+                    "index": 4,
+                    "x": 0,
+                    "y": 0,
+                    "rotation": 0,
+                    "alpha": 1,
+                    "scaleX": 1,
+                    "scaleY": 1,
+                    "signalId": 0,
+                    "materialData": [
+                        {
+                            "materials": []
+                        }
+                    ]
+                }
+            ],
+            "isHitEffect": false,
+            "ishide": false,
+            "islock": false
+        }
+    ],
+    "isParticle": false,
+    "id": 1018,
+    "particleData": null
+}

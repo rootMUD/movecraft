@@ -1,0 +1,200 @@
+{
+    "totalFrame": 20,
+    "imageSources": [
+        null,
+        {
+            "x": 0,
+            "y": 0,
+            "width": 660,
+            "height": 660,
+            "url": "asset/image/animation/skill/Communal_morale_release.png"
+        },
+        {
+            "x": -660,
+            "y": 0,
+            "width": 660,
+            "height": 660,
+            "url": "asset/image/animation/skill/Communal_morale_release.png"
+        },
+        {
+            "x": -1320,
+            "y": 0,
+            "width": 660,
+            "height": 660,
+            "url": "asset/image/animation/skill/Communal_morale_release.png"
+        },
+        {
+            "x": -1980,
+            "y": 0,
+            "width": 660,
+            "height": 660,
+            "url": "asset/image/animation/skill/Communal_morale_release.png"
+        },
+        {
+            "x": -2640,
+            "y": 0,
+            "width": 660,
+            "height": 660,
+            "url": "asset/image/animation/skill/Communal_morale_release.png"
+        },
+        {
+            "x": -3300,
+            "y": 0,
+            "width": 660,
+            "height": 660,
+            "url": "asset/image/animation/skill/Communal_morale_release.png"
+        },
+        {
+            "x": 0,
+            "y": -660,
+            "width": 660,
+            "height": 660,
+            "url": "asset/image/animation/skill/Communal_morale_release.png"
+        },
+        {
+            "x": -660,
+            "y": -660,
+            "width": 660,
+            "height": 660,
+            "url": "asset/image/animation/skill/Communal_morale_release.png"
+        },
+        {
+            "x": -1320,
+            "y": -660,
+            "width": 660,
+            "height": 660,
+            "url": "asset/image/animation/skill/Communal_morale_release.png"
+        },
+        {
+            "x": -1980,
+            "y": -660,
+            "width": 660,
+            "height": 660,
+            "url": "asset/image/animation/skill/Communal_morale_release.png"
+        },
+        {
+            "x": -2640,
+            "y": -660,
+            "width": 660,
+            "height": 660,
+            "url": "asset/image/animation/skill/Communal_morale_release.png"
+        }
+    ],
+    "layers": [
+        {
+            "type": 0,
+            "name": "[#GAME_THE_TARGET_LAYER]",
+            "children": [],
+            "frames": [
+                {
+                    "index": 0,
+                    "frameinterpolationEnabled": true,
+                    "x": 0,
+                    "y": 0,
+                    "rotation": 0,
+                    "alpha": 1,
+                    "scaleX": 1,
+                    "scaleY": 1,
+                    "materialData": [
+                        {
+                            "materials": []
+                        }
+                    ]
+                },
+                {
+                    "index": 19,
+                    "frameinterpolationEnabled": true,
+                    "x": 0,
+                    "y": 0,
+                    "rotation": 0,
+                    "alpha": 1,
+                    "scaleX": 1,
+                    "scaleY": 1,
+                    "materialData": [
+                        {
+                            "materials": []
+                        }
+                    ],
+                    "signalId": 0
+                }
+            ],
+            "isHitEffect": false,
+            "ishide": false,
+            "islock": false
+        },
+        {
+            "type": 1,
+            "name": "layer",
+            "children": [],
+            "frames": [
+                {
+                    "index": 0,
+                    "frameinterpolationEnabled": true,
+                    "materialData": [
+                        {
+                            "materials": []
+                        }
+                    ],
+                    "horizontalReversal": false,
+                    "x": 320,
+                    "y": -320,
+                    "rotation": 0,
+                    "alpha": 1,
+                    "width": -660,
+                    "height": 660,
+                    "imageSource": 1,
+                    "blendModeType": 0
+                },
+                {
+                    "index": 10,
+                    "frameinterpolationEnabled": true,
+                    "materialData": [
+                        {
+                            "materials": []
+                        }
+                    ],
+                    "horizontalReversal": false,
+                    "x": 320,
+                    "y": -320,
+                    "rotation": 0,
+                    "alpha": 1,
+                    "width": -660,
+                    "height": 660,
+                    "imageSource": 11,
+                    "blendModeType": 0,
+                    "signalId": 0
+                }
+            ],
+            "isHitEffect": false,
+            "ishide": false,
+            "islock": false
+        },
+        {
+            "type": 3,
+            "name": "[#GAME_SOUND_LAYER]",
+            "children": [],
+            "frames": [
+                {
+                    "index": 0,
+                    "frameinterpolationEnabled": true,
+                    "materialData": [
+                        {
+                            "materials": []
+                        }
+                    ]
+                }
+            ],
+            "isHitEffect": false,
+            "ishide": false,
+            "islock": false,
+            "audioInfo": {
+                "url": "asset/audio/se/battle/Communal_morale_release.ogg,1,1",
+                "volume": 1,
+                "pitch": 1
+            }
+        }
+    ],
+    "isParticle": false,
+    "id": 8033,
+    "particleData": null
+}

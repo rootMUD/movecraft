@@ -1,0 +1,160 @@
+{
+    "totalFrame": 11,
+    "imageSources": [
+        null,
+        {
+            "x": 0,
+            "y": 0,
+            "width": 440,
+            "height": 440,
+            "url": "asset/image/animation/skill/Fire_ball_ballistic.png"
+        },
+        {
+            "x": -440,
+            "y": 0,
+            "width": 440,
+            "height": 440,
+            "url": "asset/image/animation/skill/Fire_ball_ballistic.png"
+        },
+        {
+            "x": -880,
+            "y": 0,
+            "width": 440,
+            "height": 440,
+            "url": "asset/image/animation/skill/Fire_ball_ballistic.png"
+        },
+        {
+            "x": -1320,
+            "y": 0,
+            "width": 440,
+            "height": 440,
+            "url": "asset/image/animation/skill/Fire_ball_ballistic.png"
+        },
+        {
+            "x": -1760,
+            "y": 0,
+            "width": 440,
+            "height": 440,
+            "url": "asset/image/animation/skill/Fire_ball_ballistic.png"
+        },
+        {
+            "x": -2200,
+            "y": 0,
+            "width": 440,
+            "height": 440,
+            "url": "asset/image/animation/skill/Fire_ball_ballistic.png"
+        },
+        {
+            "x": -2640,
+            "y": 0,
+            "width": 440,
+            "height": 440,
+            "url": "asset/image/animation/skill/Fire_ball_ballistic.png"
+        },
+        {
+            "x": -3080,
+            "y": 0,
+            "width": 440,
+            "height": 440,
+            "url": "asset/image/animation/skill/Fire_ball_ballistic.png"
+        },
+        {
+            "x": -3520,
+            "y": 0,
+            "width": 440,
+            "height": 440,
+            "url": "asset/image/animation/skill/Fire_ball_ballistic.png"
+        },
+        {
+            "x": 0,
+            "y": -440,
+            "width": 440,
+            "height": 440,
+            "url": "asset/image/animation/skill/Fire_ball_ballistic.png"
+        },
+        {
+            "x": -440,
+            "y": -440,
+            "width": 440,
+            "height": 440,
+            "url": "asset/image/animation/skill/Fire_ball_ballistic.png"
+        }
+    ],
+    "layers": [
+        {
+            "type": 0,
+            "name": "[#GAME_THE_TARGET_LAYER]",
+            "children": [],
+            "frames": [
+                {
+                    "index": 0,
+                    "frameinterpolationEnabled": true,
+                    "x": 0,
+                    "y": 0,
+                    "rotation": 0,
+                    "alpha": 1,
+                    "scaleX": 1,
+                    "scaleY": 1,
+                    "materialData": [
+                        {
+                            "materials": []
+                        }
+                    ]
+                }
+            ],
+            "isHitEffect": false,
+            "ishide": false,
+            "islock": false
+        },
+        {
+            "type": 1,
+            "name": "layer",
+            "children": [],
+            "frames": [
+                {
+                    "index": 0,
+                    "frameinterpolationEnabled": true,
+                    "materialData": [
+                        {
+                            "materials": []
+                        }
+                    ],
+                    "horizontalReversal": false,
+                    "x": 220,
+                    "y": -165,
+                    "rotation": 0,
+                    "alpha": 1,
+                    "width": -440,
+                    "height": 440,
+                    "imageSource": 1,
+                    "blendModeType": 0
+                },
+                {
+                    "index": 10,
+                    "frameinterpolationEnabled": true,
+                    "materialData": [
+                        {
+                            "materials": []
+                        }
+                    ],
+                    "horizontalReversal": false,
+                    "x": 220,
+                    "y": -165,
+                    "rotation": 0,
+                    "alpha": 1,
+                    "width": -440,
+                    "height": 440,
+                    "imageSource": 11,
+                    "blendModeType": 0,
+                    "signalId": 0
+                }
+            ],
+            "isHitEffect": false,
+            "ishide": false,
+            "islock": false
+        }
+    ],
+    "isParticle": false,
+    "id": 20,
+    "particleData": null
+}

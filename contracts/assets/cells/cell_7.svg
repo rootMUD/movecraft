@@ -1,15 +1,15 @@
 <svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin meet" viewBox="0 0 120 120">
     <style>
         .base {
-            fill: yellow;
+            fill: black;
             font-family: serif;
             font-size: 14px;
         }
     </style>
-    <rect width="100%" height="100%" fill="black" />
+    <rect width="100%" height="100%" fill="white" />
     <text x="10" y="20" class="base">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Cell #7</text>
     <text x="10" y="40" class="base">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;___</text>
     <text x="10" y="60" class="base">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;/&#160;&#160;&#160;&#160;&#160;&#160;\</text>
-    <text x="10" y="80" class="base">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;|&#160;&#160;&#160;ꅐ&#160;&#160;&#160;|</text>
+    <text x="10" y="80" class="base">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;|&#160;&#160;&#160;ꅃ&#160;&#160;&#160;|</text>
     <text x="10" y="100" class="base">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;\___/</text>
 </svg>

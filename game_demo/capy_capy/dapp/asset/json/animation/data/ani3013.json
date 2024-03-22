@@ -1,0 +1,133 @@
+{
+    "totalFrame": 20,
+    "imageSources": [
+        null,
+        {
+            "x": 0,
+            "y": 0,
+            "width": 48,
+            "height": 48,
+            "url": "asset/image/animation/emo/Emo_shy.png"
+        }
+    ],
+    "layers": [
+        {
+            "type": 0,
+            "name": "目标层",
+            "children": [],
+            "frames": [
+                {
+                    "index": 0,
+                    "frameinterpolationEnabled": true,
+                    "x": 0,
+                    "y": 0,
+                    "rotation": 0,
+                    "alpha": 1,
+                    "scaleX": 1,
+                    "scaleY": 1,
+                    "materialData": [
+                        {
+                            "materials": []
+                        }
+                    ]
+                }
+            ],
+            "isHitEffect": false,
+            "ishide": false,
+            "islock": false
+        },
+        {
+            "type": 1,
+            "name": "layer",
+            "children": [],
+            "frames": [
+                {
+                    "index": 0,
+                    "frameinterpolationEnabled": true,
+                    "materialData": [
+                        {
+                            "materials": []
+                        }
+                    ],
+                    "horizontalReversal": false,
+                    "x": 5,
+                    "y": -100,
+                    "rotation": 0,
+                    "alpha": 0,
+                    "width": 48,
+                    "height": 48,
+                    "imageSource": 1,
+                    "blendModeType": 0
+                },
+                {
+                    "index": 9,
+                    "frameinterpolationEnabled": true,
+                    "materialData": [
+                        {
+                            "materials": []
+                        }
+                    ],
+                    "horizontalReversal": false,
+                    "x": 5,
+                    "y": -100,
+                    "rotation": 0,
+                    "alpha": 1,
+                    "blendModeType": 0,
+                    "width": 48,
+                    "height": 48,
+                    "imageSource": 1,
+                    "signalId": 0
+                },
+                {
+                    "index": 19,
+                    "frameinterpolationEnabled": true,
+                    "materialData": [
+                        {
+                            "materials": []
+                        }
+                    ],
+                    "horizontalReversal": false,
+                    "x": 5,
+                    "y": -100,
+                    "rotation": 0,
+                    "alpha": 1,
+                    "width": 48,
+                    "height": 48,
+                    "imageSource": 1,
+                    "blendModeType": 0,
+                    "signalId": 0
+                }
+            ],
+            "isHitEffect": false,
+            "ishide": false,
+            "islock": false
+        },
+        {
+            "type": 3,
+            "name": "[#GAME_SOUND_LAYER]",
+            "children": [],
+            "frames": [
+                {
+                    "index": 0,
+                    "frameinterpolationEnabled": true,
+                    "materialData": [
+                        {
+                            "materials": []
+                        }
+                    ]
+                }
+            ],
+            "isHitEffect": false,
+            "ishide": false,
+            "islock": false,
+            "audioInfo": {
+                "url": "asset/audio/se/action/Show_expression_2.ogg,1,1",
+                "volume": 1,
+                "pitch": 1
+            }
+        }
+    ],
+    "isParticle": false,
+    "id": 3013,
+    "particleData": null
+}

@@ -1,0 +1,90 @@
+{
+    "totalFrame": 10,
+    "imageSources": [
+        null,
+        {
+            "x": 0,
+            "y": 0,
+            "width": 24,
+            "height": 24,
+            "url": "asset/image/picture/icon/state/Vertigo.png"
+        }
+    ],
+    "layers": [
+        {
+            "type": 0,
+            "name": "[#GAME_THE_TARGET_LAYER]",
+            "children": [],
+            "frames": [
+                {
+                    "index": 0,
+                    "frameinterpolationEnabled": true,
+                    "x": 0,
+                    "y": 0,
+                    "rotation": 0,
+                    "alpha": 1,
+                    "scaleX": 1,
+                    "scaleY": 1,
+                    "materialData": [
+                        {
+                            "materials": []
+                        }
+                    ]
+                }
+            ],
+            "isHitEffect": false,
+            "ishide": false,
+            "islock": false
+        },
+        {
+            "type": 1,
+            "name": "layer",
+            "children": [],
+            "frames": [
+                {
+                    "index": 0,
+                    "frameinterpolationEnabled": true,
+                    "materialData": [
+                        {
+                            "materials": []
+                        }
+                    ],
+                    "horizontalReversal": false,
+                    "x": -19,
+                    "y": -227,
+                    "rotation": 0,
+                    "alpha": 1,
+                    "width": 39,
+                    "height": 39,
+                    "imageSource": 1,
+                    "blendModeType": 0
+                },
+                {
+                    "index": 9,
+                    "frameinterpolationEnabled": true,
+                    "materialData": [
+                        {
+                            "materials": []
+                        }
+                    ],
+                    "horizontalReversal": false,
+                    "x": 20,
+                    "y": -227,
+                    "rotation": 0,
+                    "alpha": 1,
+                    "width": -39,
+                    "height": 39,
+                    "imageSource": 1,
+                    "blendModeType": 0,
+                    "signalId": 0
+                }
+            ],
+            "isHitEffect": false,
+            "ishide": false,
+            "islock": false
+        }
+    ],
+    "isParticle": false,
+    "id": 9002,
+    "particleData": null
+}

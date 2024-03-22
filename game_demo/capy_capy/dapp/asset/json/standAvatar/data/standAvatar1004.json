@@ -1,0 +1,179 @@
+{
+    "picUrls": [
+        "asset/image/picture/body/physician/Physician_normal.png",
+        "asset/image/picture/body/physician/Physician_smile.png",
+        "asset/image/picture/body/physician/Physician_surprise.png",
+        "asset/image/picture/body/physician/Physician_anger.png",
+        "asset/image/picture/body/physician/Physician_sad.png"
+    ],
+    "oriMode": 1,
+    "autoFlip": true,
+    "refObjs": {},
+    "referenceMode": false,
+    "referenceID": 1,
+    "parts": [
+        {
+            "id": 0,
+            "showOnEditor": true,
+            "mouseEventEnabledInEditor": true
+        }
+    ],
+    "actionListArr": [
+        {
+            "id": 1,
+            "frameImageInfo": [
+                [
+                    {
+                        "picUrlIndex": 0,
+                        "rect": [
+                            0,
+                            0,
+                            1240,
+                            1754
+                        ],
+                        "x": -620,
+                        "y": -1754,
+                        "width": 1240,
+                        "height": 1754,
+                        "rotation": 0,
+                        "alpha": 1,
+                        "hue": 0,
+                        "blur": 0,
+                        "tonal_r": 0,
+                        "tonal_g": 0,
+                        "tonal_b": 0,
+                        "tonal_gray": 0,
+                        "tonal_mr": 1,
+                        "tonal_mg": 1,
+                        "tonal_mb": 1
+                    }
+                ]
+            ]
+        },
+        {
+            "id": 2,
+            "frameImageInfo": [
+                [
+                    {
+                        "picUrlIndex": 1,
+                        "rect": [
+                            0,
+                            0,
+                            1240,
+                            1754
+                        ],
+                        "x": -620,
+                        "y": -1754,
+                        "width": 1240,
+                        "height": 1754,
+                        "rotation": 0,
+                        "alpha": 1,
+                        "hue": 0,
+                        "blur": 0,
+                        "tonal_r": 0,
+                        "tonal_g": 0,
+                        "tonal_b": 0,
+                        "tonal_gray": 0,
+                        "tonal_mr": 1,
+                        "tonal_mg": 1,
+                        "tonal_mb": 1
+                    }
+                ]
+            ]
+        },
+        {
+            "id": 3,
+            "frameImageInfo": [
+                [
+                    {
+                        "picUrlIndex": 2,
+                        "rect": [
+                            0,
+                            0,
+                            1240,
+                            1754
+                        ],
+                        "x": -620,
+                        "y": -1754,
+                        "width": 1240,
+                        "height": 1754,
+                        "rotation": 0,
+                        "alpha": 1,
+                        "hue": 0,
+                        "blur": 0,
+                        "tonal_r": 0,
+                        "tonal_g": 0,
+                        "tonal_b": 0,
+                        "tonal_gray": 0,
+                        "tonal_mr": 1,
+                        "tonal_mg": 1,
+                        "tonal_mb": 1
+                    }
+                ]
+            ]
+        },
+        {
+            "id": 4,
+            "frameImageInfo": [
+                [
+                    {
+                        "picUrlIndex": 3,
+                        "rect": [
+                            0,
+                            0,
+                            1240,
+                            1754
+                        ],
+                        "x": -620,
+                        "y": -1754,
+                        "width": 1240,
+                        "height": 1754,
+                        "rotation": 0,
+                        "alpha": 1,
+                        "hue": 0,
+                        "blur": 0,
+                        "tonal_r": 0,
+                        "tonal_g": 0,
+                        "tonal_b": 0,
+                        "tonal_gray": 0,
+                        "tonal_mr": 1,
+                        "tonal_mg": 1,
+                        "tonal_mb": 1
+                    }
+                ]
+            ]
+        },
+        {
+            "id": 5,
+            "frameImageInfo": [
+                [
+                    {
+                        "picUrlIndex": 4,
+                        "rect": [
+                            0,
+                            0,
+                            1240,
+                            1754
+                        ],
+                        "x": -620,
+                        "y": -1754,
+                        "width": 1240,
+                        "height": 1754,
+                        "rotation": 0,
+                        "alpha": 1,
+                        "hue": 0,
+                        "blur": 0,
+                        "tonal_r": 0,
+                        "tonal_g": 0,
+                        "tonal_b": 0,
+                        "tonal_gray": 0,
+                        "tonal_mr": 1,
+                        "tonal_mg": 1,
+                        "tonal_mb": 1
+                    }
+                ]
+            ]
+        }
+    ],
+    "id": 1004
+}

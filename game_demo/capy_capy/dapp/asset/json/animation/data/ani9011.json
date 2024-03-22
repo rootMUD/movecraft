@@ -1,0 +1,90 @@
+{
+    "totalFrame": 15,
+    "imageSources": [
+        null,
+        {
+            "x": 0,
+            "y": 0,
+            "width": 48,
+            "height": 48,
+            "url": "asset/image/picture/icon/letterState/attack/Attack_down.png"
+        }
+    ],
+    "layers": [
+        {
+            "type": 0,
+            "name": "[#GAME_THE_TARGET_LAYER]",
+            "children": [],
+            "frames": [
+                {
+                    "index": 0,
+                    "frameinterpolationEnabled": true,
+                    "x": 0,
+                    "y": 0,
+                    "rotation": 0,
+                    "alpha": 1,
+                    "scaleX": 1,
+                    "scaleY": 1,
+                    "materialData": [
+                        {
+                            "materials": []
+                        }
+                    ]
+                }
+            ],
+            "isHitEffect": false,
+            "ishide": false,
+            "islock": false
+        },
+        {
+            "type": 1,
+            "name": "layer",
+            "children": [],
+            "frames": [
+                {
+                    "index": 0,
+                    "frameinterpolationEnabled": true,
+                    "materialData": [
+                        {
+                            "materials": []
+                        }
+                    ],
+                    "horizontalReversal": false,
+                    "x": -46,
+                    "y": -285,
+                    "rotation": 0,
+                    "alpha": 1,
+                    "width": 96,
+                    "height": 96,
+                    "imageSource": 1,
+                    "blendModeType": 0
+                },
+                {
+                    "index": 14,
+                    "frameinterpolationEnabled": true,
+                    "materialData": [
+                        {
+                            "materials": []
+                        }
+                    ],
+                    "horizontalReversal": false,
+                    "x": -46,
+                    "y": -275,
+                    "rotation": 0,
+                    "alpha": 0.5,
+                    "width": 96,
+                    "height": 96,
+                    "imageSource": 1,
+                    "blendModeType": 0,
+                    "signalId": 0
+                }
+            ],
+            "isHitEffect": false,
+            "ishide": false,
+            "islock": false
+        }
+    ],
+    "isParticle": false,
+    "id": 9011,
+    "particleData": null
+}

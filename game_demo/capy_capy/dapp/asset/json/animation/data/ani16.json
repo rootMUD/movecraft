@@ -1,0 +1,207 @@
+{
+    "totalFrame": 15,
+    "imageSources": [
+        null,
+        {
+            "x": 0,
+            "y": 0,
+            "width": 1000,
+            "height": 500,
+            "url": "asset/image/animation/skill/Sword_multiple_release.png"
+        },
+        {
+            "x": -1000,
+            "y": 0,
+            "width": 1000,
+            "height": 500,
+            "url": "asset/image/animation/skill/Sword_multiple_release.png"
+        },
+        {
+            "x": -2000,
+            "y": 0,
+            "width": 1000,
+            "height": 500,
+            "url": "asset/image/animation/skill/Sword_multiple_release.png"
+        },
+        {
+            "x": -3000,
+            "y": 0,
+            "width": 1000,
+            "height": 500,
+            "url": "asset/image/animation/skill/Sword_multiple_release.png"
+        },
+        {
+            "x": 0,
+            "y": -500,
+            "width": 1000,
+            "height": 500,
+            "url": "asset/image/animation/skill/Sword_multiple_release.png"
+        },
+        {
+            "x": -1000,
+            "y": -500,
+            "width": 1000,
+            "height": 500,
+            "url": "asset/image/animation/skill/Sword_multiple_release.png"
+        },
+        {
+            "x": -2000,
+            "y": -500,
+            "width": 1000,
+            "height": 500,
+            "url": "asset/image/animation/skill/Sword_multiple_release.png"
+        },
+        {
+            "x": -3000,
+            "y": -500,
+            "width": 1000,
+            "height": 500,
+            "url": "asset/image/animation/skill/Sword_multiple_release.png"
+        },
+        {
+            "x": 0,
+            "y": -1000,
+            "width": 1000,
+            "height": 500,
+            "url": "asset/image/animation/skill/Sword_multiple_release.png"
+        },
+        {
+            "x": -1000,
+            "y": -1000,
+            "width": 1000,
+            "height": 500,
+            "url": "asset/image/animation/skill/Sword_multiple_release.png"
+        },
+        {
+            "x": -2000,
+            "y": -1000,
+            "width": 1000,
+            "height": 500,
+            "url": "asset/image/animation/skill/Sword_multiple_release.png"
+        },
+        {
+            "x": -3000,
+            "y": -1000,
+            "width": 1000,
+            "height": 500,
+            "url": "asset/image/animation/skill/Sword_multiple_release.png"
+        }
+    ],
+    "layers": [
+        {
+            "type": 0,
+            "name": "[#GAME_THE_TARGET_LAYER]",
+            "children": [],
+            "frames": [
+                {
+                    "index": 0,
+                    "frameinterpolationEnabled": true,
+                    "x": 0,
+                    "y": 0,
+                    "rotation": 0,
+                    "alpha": 1,
+                    "scaleX": 1,
+                    "scaleY": 1,
+                    "materialData": [
+                        {
+                            "materials": []
+                        }
+                    ]
+                },
+                {
+                    "index": 14,
+                    "frameinterpolationEnabled": true,
+                    "x": 0,
+                    "y": 0,
+                    "rotation": 0,
+                    "alpha": 1,
+                    "scaleX": 1,
+                    "scaleY": 1,
+                    "materialData": [
+                        {
+                            "materials": []
+                        }
+                    ],
+                    "signalId": 0
+                }
+            ],
+            "isHitEffect": false,
+            "ishide": false,
+            "islock": false
+        },
+        {
+            "type": 1,
+            "name": "layer",
+            "children": [],
+            "frames": [
+                {
+                    "index": 0,
+                    "frameinterpolationEnabled": true,
+                    "materialData": [
+                        {
+                            "materials": []
+                        }
+                    ],
+                    "horizontalReversal": false,
+                    "x": 490,
+                    "y": -400,
+                    "rotation": 0,
+                    "alpha": 1,
+                    "width": -1000,
+                    "height": 500,
+                    "imageSource": 1,
+                    "blendModeType": 0
+                },
+                {
+                    "index": 11,
+                    "frameinterpolationEnabled": true,
+                    "materialData": [
+                        {
+                            "materials": []
+                        }
+                    ],
+                    "horizontalReversal": false,
+                    "x": 490,
+                    "y": -400,
+                    "rotation": 0,
+                    "alpha": 1,
+                    "width": -1000,
+                    "height": 500,
+                    "imageSource": 12,
+                    "blendModeType": 0,
+                    "signalId": 0
+                }
+            ],
+            "isHitEffect": false,
+            "ishide": false,
+            "islock": false
+        },
+        {
+            "type": 3,
+            "name": "[#GAME_SOUND_LAYER]",
+            "children": [],
+            "frames": [
+                {
+                    "index": 0,
+                    "frameinterpolationEnabled": true,
+                    "materialData": [
+                        {
+                            "materials": []
+                        }
+                    ]
+                }
+            ],
+            "isHitEffect": false,
+            "ishide": false,
+            "islock": false,
+            "audioInfo": {
+                "url": "asset/audio/se/battle/Sword_multiple_release.ogg,1,1",
+                "volume": 1,
+                "pitch": 1
+            }
+        }
+    ],
+    "isParticle": false,
+    "id": 16,
+    "particleData": null
+}

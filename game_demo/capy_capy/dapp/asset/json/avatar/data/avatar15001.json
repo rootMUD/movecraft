@@ -1,0 +1,22 @@
+{
+    "picUrls": [
+        "editorAsset/img/empty.png"
+    ],
+    "oriMode": 4,
+    "autoFlip": true,
+    "refObjs": {},
+    "parts": [
+        {
+            "id": 0,
+            "showOnEditor": true,
+            "mouseEventEnabledInEditor": true
+        }
+    ],
+    "actionListArr": [
+        {
+            "id": 1,
+            "frameImageInfo": []
+        }
+    ],
+    "id": 15001
+}

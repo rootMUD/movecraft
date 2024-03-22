@@ -1,0 +1,61 @@
+{
+    "picUrls": [
+        "editorAsset/img/empty.png"
+    ],
+    "oriMode": 1,
+    "refObjs": {},
+    "parts": [
+        {
+            "id": 0,
+            "showOnEditor": true
+        }
+    ],
+    "actionListArr": [
+        {
+            "id": 1,
+            "frameImageInfo": [
+                [
+                    {
+                        "picUrlIndex": 0,
+                        "rect": [
+                            0,
+                            0,
+                            48,
+                            48
+                        ],
+                        "x": -24,
+                        "y": -24,
+                        "width": 48,
+                        "height": 48,
+                        "rotation": 0,
+                        "alpha": 1
+                    }
+                ]
+            ]
+        },
+        {
+            "id": 2,
+            "frameImageInfo": [
+                [
+                    {
+                        "picUrlIndex": 0,
+                        "rect": [
+                            0,
+                            0,
+                            48,
+                            48
+                        ],
+                        "x": -24,
+                        "y": -24,
+                        "width": 48,
+                        "height": 48,
+                        "rotation": 0,
+                        "alpha": 1
+                    }
+                ]
+            ]
+        }
+    ],
+    "id": 0,
+    "name": "AAA1"
+}

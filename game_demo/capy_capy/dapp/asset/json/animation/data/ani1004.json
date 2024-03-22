@@ -1,0 +1,118 @@
+{
+    "totalFrame": 20,
+    "imageSources": [
+        null,
+        {
+            "x": 0,
+            "y": 0,
+            "width": 68,
+            "height": 67,
+            "url": "asset/image/animation/system/loading/Loading.png"
+        }
+    ],
+    "layers": [
+        {
+            "type": 0,
+            "name": "目标层",
+            "children": [],
+            "frames": [
+                {
+                    "index": 0,
+                    "x": 0,
+                    "y": 0,
+                    "rotation": 0,
+                    "alpha": 1,
+                    "scaleX": 1,
+                    "scaleY": 1,
+                    "materialData": [
+                        {
+                            "materials": []
+                        }
+                    ],
+                    "frameinterpolationEnabled": true
+                }
+            ],
+            "isHitEffect": false,
+            "ishide": false,
+            "islock": false
+        },
+        {
+            "type": 1,
+            "name": "layer1",
+            "children": [
+                {
+                    "type": 1,
+                    "name": "layer",
+                    "children": [],
+                    "frames": [
+                        {
+                            "index": 0,
+                            "horizontalReversal": false,
+                            "x": -33,
+                            "y": -34,
+                            "rotation": 0,
+                            "alpha": 1,
+                            "width": 68,
+                            "height": 67,
+                            "imageSource": 1,
+                            "materialData": [
+                                {
+                                    "materials": []
+                                }
+                            ],
+                            "frameinterpolationEnabled": true
+                        }
+                    ],
+                    "isHitEffect": false,
+                    "ishide": false,
+                    "islock": false
+                }
+            ],
+            "frames": [
+                {
+                    "index": 0,
+                    "frameinterpolationEnabled": true,
+                    "materialData": [
+                        {
+                            "materials": []
+                        }
+                    ],
+                    "horizontalReversal": false,
+                    "x": 0,
+                    "y": 0,
+                    "rotation": 0,
+                    "alpha": 1,
+                    "width": 100,
+                    "height": 100,
+                    "imageSource": 0,
+                    "blendModeType": 0
+                },
+                {
+                    "index": 19,
+                    "frameinterpolationEnabled": true,
+                    "materialData": [
+                        {
+                            "materials": []
+                        }
+                    ],
+                    "horizontalReversal": false,
+                    "x": 0,
+                    "y": 0,
+                    "rotation": 360,
+                    "alpha": 1,
+                    "width": 100,
+                    "height": 100,
+                    "imageSource": 0,
+                    "blendModeType": 0,
+                    "signalId": 0
+                }
+            ],
+            "isHitEffect": false,
+            "ishide": false,
+            "islock": false
+        }
+    ],
+    "isParticle": false,
+    "id": 1004,
+    "particleData": null
+}

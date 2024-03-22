@@ -1,0 +1,52 @@
+{
+    "totalFrame": 15,
+    "imageSources": [
+        null
+    ],
+    "layers": [
+        {
+            "type": 0,
+            "name": "目标-升天",
+            "children": [],
+            "frames": [
+                {
+                    "index": 0,
+                    "x": 0,
+                    "y": 0,
+                    "rotation": 0,
+                    "alpha": 1,
+                    "scaleX": 1,
+                    "scaleY": 1,
+                    "materialData": [
+                        {
+                            "materials": []
+                        }
+                    ],
+                    "frameinterpolationEnabled": true
+                },
+                {
+                    "index": 14,
+                    "x": 0,
+                    "y": -84,
+                    "rotation": 0,
+                    "alpha": 0,
+                    "scaleX": 1,
+                    "scaleY": 1,
+                    "signalId": 0,
+                    "materialData": [
+                        {
+                            "materials": []
+                        }
+                    ],
+                    "frameinterpolationEnabled": true
+                }
+            ],
+            "isHitEffect": false,
+            "ishide": false,
+            "islock": false
+        }
+    ],
+    "isParticle": false,
+    "id": 1019,
+    "particleData": null
+}

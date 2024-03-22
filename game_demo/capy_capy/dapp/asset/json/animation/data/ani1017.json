@@ -1,0 +1,36 @@
+{
+    "totalFrame": 1,
+    "imageSources": [
+        null
+    ],
+    "layers": [
+        {
+            "type": 0,
+            "name": "目标层",
+            "children": [],
+            "frames": [
+                {
+                    "index": 0,
+                    "x": 0,
+                    "y": 0,
+                    "rotation": 0,
+                    "alpha": 1,
+                    "scaleX": 1,
+                    "scaleY": 1,
+                    "materialData": [
+                        {
+                            "materials": []
+                        }
+                    ],
+                    "frameinterpolationEnabled": true
+                }
+            ],
+            "isHitEffect": false,
+            "ishide": false,
+            "islock": false
+        }
+    ],
+    "isParticle": false,
+    "id": 1017,
+    "particleData": null
+}

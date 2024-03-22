@@ -1,0 +1,241 @@
+{
+    "sceneObjects": [
+        null,
+        {
+            "modelID": 1,
+            "index": 1,
+            "name": "未命名1",
+            "x": 658,
+            "y": 432,
+            "z": 0,
+            "materialData": [
+                {
+                    "materials": []
+                }
+            ],
+            "avatarID": 1,
+            "avatarOri": 7,
+            "avatarAct": 1,
+            "avatarFPS": 12,
+            "avatarFrame": 1,
+            "avatarAlpha": 1,
+            "avatarHue": 0,
+            "shadowEnable": false,
+            "shadowWidth": 30,
+            "shadowHeight": 15,
+            "shadowAlpha": 0.5,
+            "displayList": {
+                "avatar": {
+                    "type": 1,
+                    "id": 1
+                }
+            },
+            "moduleDisplayList": [],
+            "layerLevel": 1,
+            "autoPlayEnable": true,
+            "scale": 0.25,
+            "playerUID": 0,
+            "hasCommand": [],
+            "moduleIDs": [],
+            "hideOriBox": null
+        }
+    ],
+    "customCommands": [
+        []
+    ],
+    "customAttributes": [
+        null,
+        {
+            "selectEnabled": {
+                "varType": 2,
+                "value": true,
+                "copy": false
+            },
+            "through": {
+                "varType": 2,
+                "value": false,
+                "copy": false
+            },
+            "bridge": {
+                "varType": 2,
+                "value": false,
+                "copy": false
+            },
+            "fixOri": {
+                "varType": 2,
+                "value": false,
+                "copy": false
+            },
+            "ignoreCantMove": {
+                "varType": 2,
+                "value": false,
+                "copy": false
+            },
+            "moveAutoChangeAction": {
+                "varType": 2,
+                "value": true,
+                "copy": false
+            },
+            "lockBehaviorLayer": {
+                "varType": 0,
+                "value": 0,
+                "copy": false
+            },
+            "keepMoveActWhenCollsionObstacleAndIgnoreCantMove": {
+                "varType": 2,
+                "value": false,
+                "copy": false
+            },
+            "behaviorDir4": {
+                "varType": 2,
+                "value": false,
+                "copy": false
+            },
+            "repeatedTouchEnabled": {
+                "varType": 2,
+                "value": false,
+                "copy": false
+            },
+            "onlyPlayerTouch": {
+                "varType": 2,
+                "value": false,
+                "copy": false
+            },
+            "waitTouchEvent": {
+                "varType": 2,
+                "value": false,
+                "copy": false
+            },
+            "moveSpeed": {
+                "varType": 0,
+                "value": 150,
+                "copy": false
+            },
+            "defBehavior": {
+                "varType": 1,
+                "value": "",
+                "copy": false
+            }
+        }
+    ],
+    "modulesCustomAttributes": [
+        null,
+        []
+    ],
+    "customAttributesCaches": [],
+    "modulesCustomAttributesCaches": [],
+    "events": [
+        null,
+        {
+            "condition": [],
+            "customCommands": [
+                [
+                    [
+                        11,
+                        1,
+                        "asset/image/picture/face/Capybara.png",
+                        "Capybara King",
+                        3,
+                        -3,
+                        "<span style='color:#FfFffF'>I'm the king of capybara!</span>",
+                        null,
+                        1,
+                        0,
+                        null,
+                        {
+                            "id": 1,
+                            "atts": [],
+                            "time": 60,
+                            "transitionMode": null,
+                            "nonTweenType": 0,
+                            "mode": 0
+                        },
+                        {
+                            "___cmdID": "151842246760_0.9945519250381731"
+                        }
+                    ],
+                    [
+                        3,
+                        0,
+                        -1,
+                        -1,
+                        {
+                            "___cmdID": "151842338906_0.9891773118544058"
+                        }
+                    ],
+                    [
+                        4,
+                        "Fight!",
+                        -1,
+                        -1,
+                        0,
+                        0,
+                        [],
+                        {
+                            "___cmdID": "151842367432_0.4857627939240703"
+                        }
+                    ],
+                    [
+                        100001,
+                        {
+                            "52831894612_0.7518826373351752": 1,
+                            "56548051738_0.9497465920929424": false,
+                            "56550825444_0.3048294946691761": 1,
+                            "56612352518_0.8757737943080137": 1,
+                            "107366047590_0.870679845642909": 1,
+                            "56640224257_0.3234397584799653": false,
+                            "107366021423_0.28893448053706616": 0
+                        },
+                        "151842396213_0.5775669776853622"
+                    ],
+                    [
+                        -1,
+                        {
+                            "___cmdID": "151842367433_0.05156248505499894"
+                        }
+                    ],
+                    [
+                        4,
+                        "Bye",
+                        -1,
+                        -1,
+                        0,
+                        0,
+                        [],
+                        {
+                            "___cmdID": "151842367432_0.034797926262488676"
+                        }
+                    ],
+                    [
+                        -1,
+                        {
+                            "___cmdID": "151842367433_0.5669342131793713"
+                        }
+                    ],
+                    [
+                        10,
+                        {
+                            "___cmdID": "151842367432_0.8610859655594283"
+                        }
+                    ],
+                    [
+                        -1,
+                        {
+                            "___cmdID": "151842147073_0.39187184309990597"
+                        }
+                    ]
+                ],
+                [],
+                [],
+                [],
+                []
+            ]
+        }
+    ],
+    "statusPages": [
+        null,
+        []
+    ],
+    "statusPagesSelectedIndexs": [],
+    "id": 2
+}

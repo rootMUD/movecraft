@@ -1,0 +1,153 @@
+{
+    "totalFrame": 10,
+    "imageSources": [
+        null,
+        {
+            "x": 0,
+            "y": 0,
+            "width": 660,
+            "height": 660,
+            "url": "asset/image/animation/skill/Communal_morale_buff.png"
+        },
+        {
+            "x": -660,
+            "y": 0,
+            "width": 660,
+            "height": 660,
+            "url": "asset/image/animation/skill/Communal_morale_buff.png"
+        },
+        {
+            "x": -1320,
+            "y": 0,
+            "width": 660,
+            "height": 660,
+            "url": "asset/image/animation/skill/Communal_morale_buff.png"
+        },
+        {
+            "x": -1980,
+            "y": 0,
+            "width": 660,
+            "height": 660,
+            "url": "asset/image/animation/skill/Communal_morale_buff.png"
+        },
+        {
+            "x": -2640,
+            "y": 0,
+            "width": 660,
+            "height": 660,
+            "url": "asset/image/animation/skill/Communal_morale_buff.png"
+        },
+        {
+            "x": -3300,
+            "y": 0,
+            "width": 660,
+            "height": 660,
+            "url": "asset/image/animation/skill/Communal_morale_buff.png"
+        },
+        {
+            "x": 0,
+            "y": -660,
+            "width": 660,
+            "height": 660,
+            "url": "asset/image/animation/skill/Communal_morale_buff.png"
+        },
+        {
+            "x": -660,
+            "y": -660,
+            "width": 660,
+            "height": 660,
+            "url": "asset/image/animation/skill/Communal_morale_buff.png"
+        },
+        {
+            "x": -1320,
+            "y": -660,
+            "width": 660,
+            "height": 660,
+            "url": "asset/image/animation/skill/Communal_morale_buff.png"
+        },
+        {
+            "x": -1980,
+            "y": -660,
+            "width": 660,
+            "height": 660,
+            "url": "asset/image/animation/skill/Communal_morale_buff.png"
+        }
+    ],
+    "layers": [
+        {
+            "type": 0,
+            "name": "[#GAME_THE_TARGET_LAYER]",
+            "children": [],
+            "frames": [
+                {
+                    "index": 0,
+                    "frameinterpolationEnabled": true,
+                    "x": 0,
+                    "y": 0,
+                    "rotation": 0,
+                    "alpha": 1,
+                    "scaleX": 1,
+                    "scaleY": 1,
+                    "materialData": [
+                        {
+                            "materials": []
+                        }
+                    ]
+                }
+            ],
+            "isHitEffect": false,
+            "ishide": false,
+            "islock": false
+        },
+        {
+            "type": 1,
+            "name": "layer",
+            "children": [],
+            "frames": [
+                {
+                    "index": 0,
+                    "frameinterpolationEnabled": true,
+                    "materialData": [
+                        {
+                            "materials": []
+                        }
+                    ],
+                    "horizontalReversal": false,
+                    "x": 200,
+                    "y": -210,
+                    "rotation": 0,
+                    "alpha": 1,
+                    "width": -330,
+                    "height": 330,
+                    "imageSource": 1,
+                    "blendModeType": 0
+                },
+                {
+                    "index": 9,
+                    "frameinterpolationEnabled": true,
+                    "materialData": [
+                        {
+                            "materials": []
+                        }
+                    ],
+                    "horizontalReversal": false,
+                    "x": 200,
+                    "y": -210,
+                    "rotation": 0,
+                    "alpha": 1,
+                    "width": -330,
+                    "height": 330,
+                    "imageSource": 10,
+                    "blendModeType": 0,
+                    "signalId": 0
+                }
+            ],
+            "isHitEffect": false,
+            "ishide": false,
+            "islock": false
+        }
+    ],
+    "isParticle": false,
+    "id": 9008,
+    "particleData": null
+}

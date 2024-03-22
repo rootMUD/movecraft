@@ -346,7 +346,7 @@ module movecraft::test_block {
         move_to(&token_signer, block);
 
         // Move token to creator
-        let creator_address = address_of(creator);
+        let creator_address = signer::address_of(creator);
         object::transfer_with_ref(object::generate_linear_transfer_ref(&transfer_ref), creator_address);
 
         // Update last block id
