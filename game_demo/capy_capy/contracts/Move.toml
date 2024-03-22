@@ -1,0 +1,31 @@
+[package]
+name = "capy"
+version = "1.0.0"
+authors = []
+
+[addresses]
+
+[dev-addresses]
+
+[dependencies]
+AptosFramework = { local = "../../framework/aptos-framework" }
+AptosTokenObjects = { local = "../../framework/aptos-token-objects" }
+AptosStdlib = { local = "../../framework/aptos-stdlib" }
+amovecraft = {local = "../../../contracts/movecraft"}
+
+# [dependencies.AptosFramework]
+# git = "https://github.com/aptos-labs/aptos-core.git"
+# rev = "mainnet"
+# subdir = "aptos-move/framework/aptos-framework"
+
+# [dependencies.AptosStdlib]
+# git = "https://github.com/aptos-labs/aptos-core.git"
+# rev = "mainnet"
+# subdir = "aptos-move/framework/aptos-stdlib"
+
+# [dependencies.AptosTokenObjects]
+# git = "https://github.com/aptos-labs/aptos-core.git"
+# rev = "mainnet"
+# subdir = "aptos-move/framework/aptos-token-objects"
+
+[dev-dependencies]
