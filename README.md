@@ -8,6 +8,9 @@ Deck:
 
 > [deck](./deck.pdf)
 
+Introduction Video:
+
+> [video](https://youtu.be/fB8_fVEyo1k)
 dApp for Aptoscraft:
 
 > https://craft.rootmud.xyz
