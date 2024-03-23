@@ -1,5 +1,9 @@
 # CapyCapy
 
+See online:
+
+> http://carft.rootmud.xyz/craft_example
+
 <img src="./contracts/assets/collection_uri.jpg" style="zoom: 25%;" />
 
 Hey! Here is a game demo for `aptoscraft`! A battle game with capybara as the role!
@@ -36,3 +40,7 @@ capy_white: https://arweave.net/yjgbg-Prmr_wjhZXpjofQCTfOUSi58lMAO0lwrp1ctM
 
 ## Recipe Book
 
+* one cell 0 and one cell 1 generate red capy.
+* one cell 2 and one cell 3 generate blue capy.
+* one cell 4 and one cell 5 generate yellow capy.
+* two cell 0 and one cell 5 generate white capy.

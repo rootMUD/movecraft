@@ -19,9 +19,10 @@ export const APTOS_SIGNER_URL = "https://aptos-signer.vercel.app/?msg="
 
 
 export const BLOCK_COLLECTION_NAME = "Block";
-export const BLOCK_COLLECTION_DESCRIPTION = "Movecraft Block";
-export const BLOCK_COLLECTION_URI = "block.png";
+
+export const CAPY_COLLECTION_NAME = "CAPY COLLECTION";
 
 export const STATE_SEED = "movecraft_signer";
 export const MINT_SEED = "mint_signer";
 export const BURN_SEED = "burn_signer";
+export const CAPY_STATE_SEED = "capy_v4_signer";

@@ -24,14 +24,28 @@ import { BlockItem } from "../components/BlockItem";
 
 export default function Home() {
 
+  const copyToClipboard = async () => {
+    console.log("selectedBlock", selectedBlock?.token_id);
+    try {
+      await navigator.clipboard.writeText(
+        selectedBlock?.token_id || "No Cell ID"
+      );
+      toast.success("Cell ID copied to clipboard!");
+    } catch (err) {
+      console.error("Failed to copy: ", err);
+      toast.error("Failed to copy Cell ID.");
+    }
+  };
+
   const client = new WalletClient(APTOS_NODE_URL, APTOS_FAUCET_URL);
 
   const { account, signAndSubmitTransaction } = useWallet();
 
   const [isLoading, setLoading] = useState<boolean>(false);
-  const [blockType, setBlockType] = useState<number>(BlockType.Cell_0);
+  // const [blockType, setBlockType] = useState<number>(BlockType.Cell_0);
   const [blocks, setBlocks] = useState<Block[]>([]);
   const [selectedId, setSelectedId] = useState<number>();
+  const [selectedBlock, setSelectedBlock] = useState<Block>();
   const [isStackMode, setStackMode] = useState<boolean>(false);
 
   const loadBlocks = async () => {
@@ -104,7 +118,7 @@ export default function Home() {
     try {
       const payloads = {
         type: "entry_function_payload",
-        function: DAPP_ADDRESS + "::test_block::mint",
+        function: DAPP_ADDRESS + "::block::mint",
         type_arguments: [],
         arguments: [],
         // mint to signer as default.
@@ -188,7 +202,7 @@ export default function Home() {
     try {
       const payloads = {
         type: "entry_function_payload",
-        function: DAPP_ADDRESS + "::test_block::stack_block",
+        function: DAPP_ADDRESS + "::block::stack_block",
         type_arguments: [],
         arguments: [selectedId, otherBlock],
       };
@@ -214,14 +228,15 @@ export default function Home() {
     }
   };
 
-  const handleSelect = (id: number) => {
+  const handleSelect = (block: Block) => {
+    setSelectedBlock(block);
     if (isStackMode) {
-      if (selectedId != id) {
-        handleStackBlock(id);
+      if (selectedId != block.id) {
+        handleStackBlock(block.id);
       }
     } else {
-      if (selectedId != id) {
-        setSelectedId(id);
+      if (selectedId != block.id) {
+        setSelectedId(block.id);
       } else {
         setSelectedId(undefined);
       }
@@ -239,7 +254,7 @@ export default function Home() {
         <p>
           <b>Module Path: </b>
           <a target="_blank" href={MODULE_URL} className="underline">
-            {DAPP_ADDRESS}::test_movecraft
+            {DAPP_ADDRESS}::movecraft
           </a>
         </p>
 
@@ -263,35 +278,35 @@ export default function Home() {
 
               <img
                 style={{ width: "10%" }}
-                src="https://arweave.net/ZSuRY-jNPllbaPAWKLfGUPRv-5_QCP8Rya2sskqfqyc"
+                src="https://arweave.net/7xopmyHOuhNtH2UXomaCt8m3FK42EzJ8Fb8MuGtXU58"
               ></img>
               <img
                 style={{ width: "10%" }}
-                src="https://arweave.net/m2FUu-9_-qFw91eM5ft9N07QyUJzrtiT7lCBhtvU5BA"
+                src="https://arweave.net/vKq1vpQ2gR05Hf9Nn50Ut-0j2BhtOwzBnUxxDNCuTXA"
               ></img>
               <img
                 style={{ width: "10%" }}
-                src="https://arweave.net/3z0hO8mspZ7uihEpAVoo7xbOrYIlKYwwtQKFvd0t11s"
+                src="https://arweave.net/y8aRTqcRdvBmI6DwJ7_RgK22U2tcsD97vQ8Mz64IGn0"
               ></img>
               <img
                 style={{ width: "10%" }}
-                src="https://arweave.net/h5PywMJR0_7TfGYjBcYHTtclpd1kP26XOM1m9VFIUQc"
+                src="https://arweave.net/1WNPHI6RU0L91vDM9p6a7MY6AoGlO959iRPrle_0QAA"
               ></img>
               <img
                 style={{ width: "10%" }}
-                src="https://arweave.net/Q4GjxhumU1s621b4F1rCWJkzIEpuMiS4KrRttuL3F-c"
+                src="https://arweave.net/pPX-WLBK-CfLe_TdE-Bm7QURuUvFIEwok9tc_aGQjrM"
               ></img>
               <img
                 style={{ width: "10%" }}
-                src="https://arweave.net/5QPqZsLb9CbpHqIojZGNXf6QkLB5FGB4_qjbFGDEn4E"
+                src="https://arweave.net/IynWqymNQoSPeIjGjV0I1vhXp9mCiOzyB6F9Pbd1aoQ"
               ></img>
               <img
                 style={{ width: "10%" }}
-                src="https://arweave.net/NwWHZeliXk7UIwjUnCCw35vKEhBd8KTbd591jInMhRw"
+                src="https://arweave.net/uZAmafyXBL8KFeIWuLi6P3jSeRZke7oVnuAMRgup0_k"
               ></img>
               <img
                 style={{ width: "10%" }}
-                src="https://arweave.net/tc9aNgx5OxcFoC9IuCadqnDUHIq1i036u2qgqdW77Pw"
+                src="https://arweave.net/GokPo_tEy0AYT1RUrHm9fz0J29cQ0eEmYt4CT5kuq5I"
               ></img>
             </div>
             <br></br>
@@ -328,6 +343,14 @@ export default function Home() {
                     onClick={() => setStackMode(!isStackMode)}
                   >
                     {isStackMode ? "Cancle Stack" : "Stack Block"}
+                  </button>
+
+                  <button
+                    type="button"
+                    className="bg-green-500 rounded-md text-white px-4 py-2 hover:bg-green-600"
+                    onClick={() => copyToClipboard()}
+                  >
+                    Copy Cell ID
                   </button>
                 </>
               )}
