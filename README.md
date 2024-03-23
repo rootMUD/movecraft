@@ -2,13 +2,11 @@
 
 Decentralized Game Craft Protocol written in Move language.
 
-Motivation by: 
+> **💡 Attention:** The smart contract is working under [randomnet](https://github.com/aptos-labs/aptos-core/tree/randomnet) branch now. It will publish to mainnet after the random module update to mainnet.
 
-> https://github.com/movefuns/movecraft
+Deck:
 
-💡 Attention:
-
-> The smart contract is working under [randomnet](https://github.com/aptos-labs/aptos-core/tree/randomnet) branch now. It will publish to mainnet after the random module update to mainnet.
+> [deck](./deck.pdf)
 
 dApp for Aptoscraft:
 
@@ -17,6 +15,10 @@ dApp for Aptoscraft:
 Smart Contract on Randomness Network:
 
 > https://explorer.aptoslabs.com/account/0xd6c5798538b1f92da226d1bebc3a32e510b207237d65bb65427f7db89fcfa0d3/modules/run/capy/generate_capy?network=randomnet
+
+Motivation by: 
+
+> https://github.com/movefuns/movecraft
 
 ## Motivation
 
