@@ -265,7 +265,8 @@ module movecraft::block {
     }
 
     // Mint block by randomlly type
-    public entry fun mint(creator: &signer) acquires State {
+    #[randomness]
+    entry fun mint(creator: &signer) acquires State {
         // paid for block
         // let treature = borrow_global_mut<Treature>(@movecraft);
         // let coin_new= coin::withdraw<AptosCoin>(creator, 10_000);
