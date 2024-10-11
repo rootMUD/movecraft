@@ -10,22 +10,22 @@ RMUDGameCoin = { local = "../rmud-game-coin" }
 
 [dependencies.AptosFramework]
 git = "https://github.com/aptos-labs/aptos-core.git"
-rev = "mainnet"
+rev = "release-v.1.14"
 subdir = "aptos-move/framework/aptos-framework"
 
 [dependencies.AptosStdlib]
 git = "https://github.com/aptos-labs/aptos-core.git"
-rev = "mainnet"
+rev = "release-v.1.14"
 subdir = "aptos-move/framework/aptos-stdlib"
 
 [dependencies.AptosTokenObjects]
 git = "https://github.com/aptos-labs/aptos-core.git"
-rev = "mainnet"
+rev = "release-v.1.14"
 subdir = "aptos-move/framework/aptos-token-objects"
 
 [addresses]
 std = "0x1"
 aptos_std = "0x1"
 aptos_framework = "0x1"
-my_addr = "0x517b41b00ea1ff5d34add5149cb19856dcf8be9fdef41d3444324feeca7777c8"
+# my_addr = "0x517b41b00ea1ff5d34add5149cb19856dcf8be9fdef41d3444324feeca7777c8"
 movecraft = "_"

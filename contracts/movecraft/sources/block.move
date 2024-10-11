@@ -20,9 +20,6 @@ module movecraft::block {
     use aptos_framework::coin;
     use aptos_framework::aptos_coin::AptosCoin;
 
-    // 404 coin
-    use my_addr::rmud_game_coin::RMUDGameCoin;
-
     // vector
     use std::vector;
 
@@ -42,10 +39,10 @@ module movecraft::block {
     const MINT_SEED: vector<u8> = b"mint_signer";
     const BURN_SEED: vector<u8> = b"burn_signer";
 
-    const BLOCK_COLLECTION_NAME: vector<u8> = b"Block";
-    const BLOCK_COLLECTION_DESCRIPTION: vector<u8> = b"Movecraft Block";
-    // TODO: update the block collection uri.
-    const BLOCK_COLLECTION_URI: vector<u8> = b"block.svg";
+    const BLOCK_COLLECTION_NAME: vector<u8> = b"Blocks";
+    const BLOCK_COLLECTION_DESCRIPTION: vector<u8> = b"Movecraft Blocks";
+
+    const BLOCK_COLLECTION_URI: vector<u8> = b"https://arweave.net/-pzxECD-3v184ePZWmPNhR2y0Ikht7jFpmL9lK_cHs0";
 
     const LOG_BLOCK_TYPE: u64 = 11;
     const PLANK_BLOCK_TYPE: u64 = 12;
@@ -54,15 +51,19 @@ module movecraft::block {
     const BLOCK_TYPE_KEY: vector<u8> = b"type";
     const BLOCK_COUNT_KEY: vector<u8> = b"count";
 
+    // The mint price could be set by the smart contract owner.
+    const MINT_PRICE: u64 = 0;
+
     /// Global state
     struct State has key {
         // the signer cap of the module's resource account
         signer_cap: SignerCapability, 
-        
-        last_block_id: u64,
+
+        last_block_id: u64, 
 
         // block address collection
         blocks: SimpleMap<u64, address>,
+        acc_mint_block_num: SimpleMap<u64, u64>, 
 
         // events
         mint_block_events: event::EventHandle<MintBlockEvents>,
@@ -122,6 +123,7 @@ module movecraft::block {
         move_to(&resource_account, State {
             signer_cap,
             last_block_id: 0,
+            acc_mint_block_num: simple_map::create(),
             blocks: simple_map::create(),
             mint_block_events: account::new_event_handle<MintBlockEvents>(&resource_account),
             burn_block_events: account::new_event_handle<BurnBlockEvents>(&resource_account),
@@ -138,28 +140,12 @@ module movecraft::block {
         );
     }
 
-    // like ERC404, transfer with the mint?
-
-    public entry fun transfer(creator: &signer, to: address, amount: u64, burn_ids: vector<u64>) acquires State, Block {
-        // transfer the coin
-        aptos_account::transfer_coins<RMUDGameCoin>(creator, to, amount);
-        // check the amount
-        let burn_ids_length = vector::length(&burn_ids);
-        let amount_match = burn_ids_length >= amount;
-        assert!(amount_match, ENOT_AMOUNT_MATCH);
-        let i = 0;
-        while (i < burn_ids_length){
-            // burn from
-            burn_block(creator, *vector::borrow<u64>(&burn_ids, i));
-            // mint to
-            mint_to(creator, to);
-            i = i + 1;
-        }
-    }
-
     // Mint block by randomlly type
-    public entry fun mint_to(creator: &signer, to: address) acquires State {
-        // TODO: paid for block
+    public entry fun mint_to(creator: &signer, to: address) acquires State, Treature {
+        // Pay for block
+        let treature = borrow_global_mut<Treature>(@movecraft);
+        let coin_payment = coin::withdraw<AptosCoin>(creator, MINT_PRICE);
+        coin::merge(&mut treature.coins, coin_payment);
         // for the mvp, there are 8 types for blocks
         // range from begin to end-1
         let type = randomness::u64_range(0, 26);
@@ -252,6 +238,14 @@ module movecraft::block {
         simple_map::add(&mut state.blocks, block_id, block_address);
         state.last_block_id = block_id;
 
+        // Update acc mint block num
+        if (simple_map::contains_key(&state.acc_mint_block_num, &block_type)) {
+            let current_count = *simple_map::borrow(&state.acc_mint_block_num, &block_type);
+            simple_map::upsert(&mut state.acc_mint_block_num, block_type, current_count + 1);
+        } else {
+            simple_map::add(&mut state.acc_mint_block_num, block_type, 1);
+        };
+
         // Emit mint event
         event::emit_event<MintBlockEvents>(
             &mut state.mint_block_events,
@@ -266,113 +260,8 @@ module movecraft::block {
 
     // Mint block by randomlly type
     #[randomness]
-    entry fun mint(creator: &signer) acquires State {
-        // paid for block
-        // let treature = borrow_global_mut<Treature>(@movecraft);
-        // let coin_new= coin::withdraw<AptosCoin>(creator, 10_000);
-        // coin::merge(&mut treature.coins, coin_new);
-        // for the mvp, there are 8 types for blocks
-        // range from begin to end-1
-        let type = randomness::u64_range(0, 26);
-        let block_type: u64;
-
-        if(type >= 0 && type <= 3) {
-            block_type = 0;
-        } else if(type >= 4 && type <= 6) {
-            block_type = 1;
-        } else if(type >= 6 && type <= 9) {
-            block_type = 2;
-        } else if(type >= 9 && type <= 12) {
-            block_type = 3;
-        } else if(type >= 12 && type <= 15) {
-            block_type = 4;
-        } else if(type >= 15 && type <= 18) {
-            block_type = 5;
-        } else if(type >= 18 && type <= 21) {
-            block_type = 5;
-        } else if(type >= 21 && type <= 24) {
-            block_type = 6;
-        } else {
-            block_type = 7;
-        };
-
-        let block_type_name = string::utf8(block_type::name(block_type));
-
-        let resource_address = get_resource_address();
-        let state = borrow_global_mut<State>(resource_address);
-        let resource_account = account::create_signer_with_capability(&state.signer_cap);
-
-        let block_id = state.last_block_id + 1;
-        let token_name = string_utils::format2(&b"{} #{}", block_type_name, block_id);
-
-        let description = string::utf8(block_type::description(block_type));
-        let uri = string::utf8(block_type::uri(block_type));
-
-        let constructor_ref = token::create_named_token(
-            &resource_account,
-            string::utf8(BLOCK_COLLECTION_NAME),
-            description,
-            token_name,
-            option::none(),
-            uri,
-        );
-
-        // Generate mint, burn, transfer cap
-        let token_signer = object::generate_signer(&constructor_ref);
-        let mutator_ref = token::generate_mutator_ref(&constructor_ref);
-        let burn_ref = token::generate_burn_ref(&constructor_ref);
-        let transfer_ref = object::generate_transfer_ref(&constructor_ref);
-        let property_mutator_ref = property_map::generate_mutator_ref(&constructor_ref);
-
-        let properties = property_map::prepare_input(vector[], vector[], vector[]);
-        property_map::init(&constructor_ref, properties);
-        property_map::add_typed<u64>(
-            &property_mutator_ref,
-            string::utf8(BLOCK_ID_KEY),
-            block_id,
-        );
-        property_map::add_typed<u64>(
-            &property_mutator_ref,
-            string::utf8(BLOCK_TYPE_KEY),
-            block_type, 
-            // block type here.
-        );
-        property_map::add_typed<u64>(
-            &property_mutator_ref,
-            string::utf8(BLOCK_COUNT_KEY),
-            1,
-        );
-        let block_num = 1;
-        // Move block object into token signer
-        let block = Block {
-            block_type, 
-            block_num, 
-            mutator_ref,
-            burn_ref,
-            property_mutator_ref,
-        };
-
-        move_to(&token_signer, block);
-
-        // Move token to creator
-        let creator_address = address_of(creator);
-        object::transfer_with_ref(object::generate_linear_transfer_ref(&transfer_ref), creator_address);
-
-        // Update last block id
-        let block_address = signer::address_of(&token_signer);
-        simple_map::add(&mut state.blocks, block_id, block_address);
-        state.last_block_id = block_id;
-
-        // Emit mint event
-        event::emit_event<MintBlockEvents>(
-            &mut state.mint_block_events,
-            MintBlockEvents {
-                name: token_name,
-                block_id,
-                creator: creator_address,
-                event_timestamp: timestamp::now_seconds(),
-            },
-        );
+    entry fun mint(creator: &signer) acquires State, Treature {
+        mint_to(creator, signer::address_of(creator))
     }
 
     // Burn block by owner
