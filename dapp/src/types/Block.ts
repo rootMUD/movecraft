@@ -7,4 +7,5 @@ export type Block = {
   id: number;
   type: BlockType;
   count: number;
+  object_id: string;
 };

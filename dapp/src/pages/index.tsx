@@ -10,13 +10,8 @@ import { useWallet } from "@manahippo/aptos-wallet-adapter";
 import { MoveResource } from "@martiandao/aptos-web3-bip44.js/dist/generated";
 import { useState, useEffect } from "react";
 import React from "react";
-import {
-  AptosAccount,
-  WalletClient,
-  HexString,
-  Provider,
-  Network,
-} from "@martiandao/aptos-web3-bip44.js";
+import { Account, Aptos, AptosConfig, Network } from "@aptos-labs/ts-sdk";
+
 import { BlockType } from "../types";
 import toast, { LoaderIcon } from "react-hot-toast";
 import { Block } from "../types/Block";
@@ -37,7 +32,8 @@ export default function Home() {
     }
   };
 
-  const client = new WalletClient(APTOS_NODE_URL, APTOS_FAUCET_URL);
+  const config = new AptosConfig({ network: Network.TESTNET });
+  const client = new Aptos(config);
 
   const { account, signAndSubmitTransaction } = useWallet();
 
@@ -57,28 +53,15 @@ export default function Home() {
         setStackMode(false);
         setSelectedId(undefined);
 
-        const provider = new Provider({
-          fullnodeUrl: "https://fullnode.random.aptoslabs.com/v1",
-          indexerUrl: "https://indexer-randomnet.hasura.app/v1/graphql"
+        const collectionAddress = await getCollectionAddr();
+
+        const tokens = await client.getAccountOwnedTokensFromCollectionAddress({
+          accountAddress: account.address.toString(),
+          collectionAddress: collectionAddress,
         });
-        const resourceAddress = await AptosAccount.getResourceAccountAddress(
-          DAPP_ADDRESS,
-          new TextEncoder().encode(STATE_SEED)
-        );
-        const collectionAddress = await provider.getCollectionAddress(
-          resourceAddress,
-          BLOCK_COLLECTION_NAME
-        );
 
-        const tokens = await provider.getTokenOwnedFromCollectionAddress(
-          account.address.toString(),
-          collectionAddress,
-          {
-            tokenStandard: "v2",
-          }
-        );
 
-        const blocks = tokens.current_token_ownerships_v2.map((t) => {
+        const blocks = tokens.map((t) => {
           const token_data = t.current_token_data;
           const properties = token_data?.token_properties;
           console.log("token_data", token_data);
@@ -103,6 +86,17 @@ export default function Home() {
   useEffect(() => {
     loadBlocks();
   }, [account]);
+
+  async function getCollectionAddr() {
+    const payload = {
+      function: DAPP_ADDRESS + `::block::get_collection_address`,
+      type_arguments: [],
+      arguments: [],
+    };
+    const res = (await client.view({payload: payload}));
+    console.log("collectionAddr", res[0]);
+    return res[0];
+  }
 
   const handleMintBlock = async () => {
     if (!account) {

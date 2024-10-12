@@ -1,33 +1,25 @@
-import { useState } from "react";
+import React from 'react';
 import { Block } from "../types/Block";
 
-export function BlockItem({
-  block,
-  selectedId,
-  isStackMode,
-  handleSelect,
-}: {
+interface BlockItemProps {
   block: Block;
-  selectedId: number | undefined;
+  selectedId?: number;
   isStackMode: boolean;
-  handleSelect: (block: Block) => void; // Updated parameter type
-  // handleSelect: (_id: number) => void;
-}) {
+  handleSelect: (block: Block) => void;
+}
+
+export const BlockItem: React.FC<BlockItemProps> = ({ block, selectedId, isStackMode, handleSelect }) => {
   return (
-    <div className={`${selectedId == block.id ? 'bg-blue-300' : 'bg-blue-200'}
-    ${selectedId == block.id && isStackMode ? 'opacity-50' : ''}
-     w-24 h-24 flex flex-col gap-2 justify-center items-center cursor-pointer hover:bg-blue-300`}
-      onClick={() => handleSelect(block)}>
-      {/* <span className="text-md">
-        {block.token_id}
-      </span> */}
-      <span className="text-md">
-        {block.name}
-      </span>
-      <p className="text-sm">
-        Count:&nbsp;
-        <b>{block.count}</b>
-      </p>
+    <div
+      className={`cursor-pointer border-2 p-2 rounded-md ${
+        selectedId === block.id ? 'border-blue-500' : 'border-gray-300'
+      }`}
+      onClick={() => handleSelect(block)}
+    >
+      <img src={block.token_uri} alt={block.name} className="w-32 h-32 object-cover" />
+      {/* <p className="mt-2 text-center">{block.name}</p> */}
+      <p className="text-sm text-center text-gray-500">Type: {block.type}</p>
+      <p className="text-sm text-center text-gray-500">Count: {block.count}</p>
     </div>
   );
-}
+};
