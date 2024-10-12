@@ -59,17 +59,21 @@ export default function Home() {
     setCraftPreview("https://question-vox.vercel.app/");
   };
 
-  const playwithCapy = async () => {
-    if (selectedCapy?.color === "yellow") {
-      window.open("https://capy-game-yellow.vercel.app/", "_blank");
-    } else if (selectedCapy?.color === "red") {
-      window.open("https://capy-game-red.vercel.app/", "_blank");
-    } else if (selectedCapy?.color === "blue") {
-      window.open("https://capy-game-blue.vercel.app/", "_blank");
-    } else if (selectedCapy?.color === "white") {
-      window.open("https://capy-game-1.vercel.app/", "_blank");
+  const playwithCapy = useCallback((capy: Capy) => {
+    const gameUrls = {
+      yellow: "https://capy-game-yellow.vercel.app/",
+      red: "https://capy-game-red.vercel.app/",
+      blue: "https://capy-game-blue.vercel.app/",
+      white: "https://capy-game-1.vercel.app/",
+    };
+
+    const url = gameUrls[capy.color as keyof typeof gameUrls];
+    if (url) {
+      window.open(url, "_blank");
+    } else {
+      console.error("Invalid capy color");
     }
-  };
+  }, []);
 
   //   public entry fun generate_capy(
   //     account: &signer,
@@ -209,6 +213,7 @@ export default function Home() {
         console.log("properties", properties);
         return {
           name: token_data?.token_name || "",
+          description: token_data?.description || "",
           token_id: token_data?.token_data_id || "",
           token_uri: token_data?.token_uri || "",
           color: properties.color,
@@ -455,7 +460,8 @@ export default function Home() {
                     key={idx}
                     capy={capy}
                     selectedCapy={selectedCapy}
-                    handleSelect={() => {}}
+                    handleSelect={(capy) => setSelectedCapy(capy)}
+                    handlePlay={playwithCapy}
                   />
                 ))
               )}
@@ -473,7 +479,7 @@ export default function Home() {
                   <button
                     type="button"
                     className="bg-green-500 rounded-md text-white px-4 py-2 hover:bg-green-600"
-                    onClick={() => playwithCapy()}
+                    onClick={() => playwithCapy(selectedCapy)}
                   >
                     Play by this Capy!
                   </button>
