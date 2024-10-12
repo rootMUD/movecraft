@@ -226,7 +226,7 @@ export default function Home() {
   }, [account]);
 
   // Add this function to determine the capy color based on the craft
-  const determineCapyColor = () => {
+  const determineCapyColor = (craft:Map<number, number>) => {
     console.log("craft", craft);
     if (craft.get(0) >= 1 && craft.get(1) >= 1) return "red";
     if (craft.get(2) >= 1 && craft.get(3) >= 1) return "blue";
@@ -256,6 +256,7 @@ export default function Home() {
     if (!selectedBlock) return;
 
     try {
+      let color = '';
       setCraft((prevCraft) => {
         const newCraft = new Map(prevCraft);
         const currentCount = newCraft.get(selectedBlock.type) || 0;
@@ -270,14 +271,15 @@ export default function Home() {
           Number(selectedBlock.type),
           currentCount + Number(selectedBlock.count)
         );
+        // Determine the capy color and set the preview
+      color = determineCapyColor(newCraft) || '';
         return newCraft;
       });
 
       // Update craftTokenIds with the object_id of the selected block
       setCraftTokenIds((prevTokenIds) => [...prevTokenIds, selectedBlock.object_id]);
 
-      // Determine the capy color and set the preview
-      const color = determineCapyColor();
+      
       console.log("color", color);
       const uri = getVoxelUri(color);
       setCraftPreview(
