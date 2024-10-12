@@ -6,7 +6,7 @@ version = '1.0.0'
 # AptosFramework = { local = "../../framework/aptos-framework" }
 # AptosTokenObjects = { local = "../../framework/aptos-token-objects" }
 # AptosStdlib = { local = "../../framework/aptos-stdlib" }
-RMUDGameCoin = { local = "../rmud-game-coin" }
+# RMUDGameCoin = { local = "../rmud-game-coin" }
 
 [dependencies.AptosFramework]
 git = "https://github.com/aptos-labs/aptos-core.git"
@@ -27,5 +27,5 @@ subdir = "aptos-move/framework/aptos-token-objects"
 std = "0x1"
 aptos_std = "0x1"
 aptos_framework = "0x1"
-# my_addr = "0x517b41b00ea1ff5d34add5149cb19856dcf8be9fdef41d3444324feeca7777c8"
+admin = "0x2df41622c0c1baabaa73b2c24360d205e23e803959ebbcb0e5b80462165893ed"
 movecraft = "_"

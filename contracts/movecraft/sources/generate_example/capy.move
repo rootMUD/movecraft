@@ -164,31 +164,31 @@ module movecraft::capy {
         vector::append(&mut uri, BASE_URI);
          vector::append(&mut voxel_uri, BASE_URI);
         let (id_1, _name_1, type_1, count_1, _stackable_1) = block::get_block_properties_by_obj(elements_1);
-        let (id_2, _name_2, type_2, _count_2, _stackable_2) = block::get_block_properties_by_obj(elements_2);
+        let (id_2, _name_2, type_2, count_2, _stackable_2) = block::get_block_properties_by_obj(elements_2);
         
         // one type 0 and one type 1 generate red.
         // one type 2 and one type 3 generate blue.
         // one type 4 and one type 5 generate yellow.
         // two type 0 and one type 5 generate white.
-        if(type_1 == 0 && type_2 == 1){
+        if ((type_1 == 0 && type_2 == 1) || (type_1 == 1 && type_2 == 0)) {
             vector::append(&mut uri, URI_RED);
             vector::append(&mut voxel_uri, URI_VOXEL_RED);
             create_capy(account, name, description, string::utf8(uri), string::utf8(voxel_uri), string::utf8(b"red"));
             block::burn_block(account, id_1);
             block::burn_block(account, id_2);
-        }else if(type_1 == 2 && type_2 == 3){
+        } else if ((type_1 == 2 && type_2 == 3) || (type_1 == 3 && type_2 == 2)) {
             vector::append(&mut uri, URI_BLUE);
             vector::append(&mut voxel_uri, URI_VOXEL_BLUE);
             create_capy(account, name, description, string::utf8(uri), string::utf8(voxel_uri), string::utf8(b"blue"));
             block::burn_block(account, id_1);
             block::burn_block(account, id_2);
-        }else if(type_1 == 4 && type_2 == 5){
+        }else if((type_1 == 4 && type_2 == 5) || (type_1 == 5 && type_2 == 4)){
             vector::append(&mut uri, URI_YELLOW);
             vector::append(&mut voxel_uri, URI_VOXEL_YELLOW);
             create_capy(account, name, description, string::utf8(uri), string::utf8(voxel_uri),  string::utf8(b"yellow"));
             block::burn_block(account, id_1);
             block::burn_block(account, id_2);
-        }else if(type_1 == 0 && type_2 == 5  && (count_1 >= 2)){
+        }else if((type_1 == 0 && type_2 == 5 && count_1 >= 2) || (type_1 == 5 && type_2 == 0 && count_2 >= 2)){
             vector::append(&mut uri, URI_WHITE);
             vector::append(&mut voxel_uri, URI_VOXEL_WHITE);
             block::burn_block(account, id_1);
@@ -199,17 +199,16 @@ module movecraft::capy {
         };
     }
 
+    #[view]
+    public fun get_collection_address(): address {
+        let resource_address = get_resource_address();
+        collection::create_collection_address(&resource_address, &string::utf8(COLLECTION_NAME))
+    }
 
-    // public entry fun mint_capy_test(
-    //     account: &signer,
-    //     name: String,
-    //     description: String,
-    //     uri: String,
-    // ) acquires State {
-    //     create_capy(account, name, description, uri, string::utf8(b"red"));
-    // }
-
-    // View functions
+        #[view]
+    public fun get_resource_address(): address {
+        account::create_resource_address(&@movecraft, STATE_SEED)
+    }
 
     #[view]
     public fun view_capy(creator: address, collection: String, name: String): Capy acquires Capy {

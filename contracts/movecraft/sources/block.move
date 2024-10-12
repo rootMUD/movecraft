@@ -2,7 +2,7 @@ module movecraft::block {
     use aptos_framework::account::{Self, SignerCapability};
     use aptos_framework::aptos_account;
     use aptos_framework::event;
-    use aptos_framework::object::{Self, ConstructorRef, Object};
+    use aptos_framework::object::{Self, ConstructorRef, Object, ObjectCore};
     use aptos_framework::timestamp;
     use aptos_std::string_utils::{Self};
     use aptos_std::simple_map::{Self, SimpleMap};
@@ -26,7 +26,7 @@ module movecraft::block {
     use movecraft::block_type;
 
     /// Movecraft error codes
-    const ENOT_SIGNER_NOT_ADMIN: u64 = 1;
+    const ENOT_SIGNER_NOT_PRICE_CAP_OWNER: u64 = 0;
     const ENOT_VALID_BLOCK_TYPE: u64 = 2;
     const ENOT_BLOCK_OWNER: u64 = 3;
     const ENOT_VALID_BLOCK: u64 = 4;
@@ -51,16 +51,17 @@ module movecraft::block {
     const BLOCK_TYPE_KEY: vector<u8> = b"type";
     const BLOCK_COUNT_KEY: vector<u8> = b"count";
 
-    // The mint price could be set by the smart contract owner.
-    const MINT_PRICE: u64 = 0;
+    // TODO:The mint price could be set by the smart contract owner.
+
+    struct PriceCap has key {}
 
     /// Global state
     struct State has key {
         // the signer cap of the module's resource account
-        signer_cap: SignerCapability, 
-
+        signer_cap: SignerCapability,
+        price_cap_id: address,
         last_block_id: u64, 
-
+        mint_price: u64,
         // block address collection
         blocks: SimpleMap<u64, address>,
         acc_mint_block_num: SimpleMap<u64, u64>, 
@@ -105,29 +106,43 @@ module movecraft::block {
         event_timestamp: u64
     }
 
-    // This function is only callable during publishing
-    fun init_module(admin: &signer) {
-        // Validate signer is admin
-        assert!(signer::address_of(admin) == @movecraft, ENOT_SIGNER_NOT_ADMIN);
+    fun transfer<T: key>(owner: &signer, object: Object<T>, destination: address) {
+        object::transfer(owner, object, destination);
+    }
 
-        // Create the resource account with admin account and provided SEED constant
-        let (resource_account, signer_cap) = account::create_resource_account(admin, STATE_SEED);
+    // This function is only callable during publishing
+    fun init_module(account: &signer) {
+        let (resource_account, signer_cap) = account::create_resource_account(account, STATE_SEED);
 
         move_to(
-            admin, 
+            account, 
             Treature {
                 coins: coin::zero()
             }
-
         );
+
+        // Ref: https://aptos.dev/en/build/smart-contracts/objects
+        let caller_address = signer::address_of(account);
+        let constructor_ref = object::create_object(caller_address);
+        let object_signer = object::generate_signer(&constructor_ref);
+        move_to(&object_signer, PriceCap {});
+        let object = object::object_from_constructor_ref<ObjectCore>(&constructor_ref);
+        
+        // Get the object ID (address) of the PriceCap object
+        let price_cap_id = object::object_address(&object);
+
+        object::transfer(account, object, @admin);
+
         move_to(&resource_account, State {
             signer_cap,
+            price_cap_id, // Use the object ID here
             last_block_id: 0,
             acc_mint_block_num: simple_map::create(),
             blocks: simple_map::create(),
             mint_block_events: account::new_event_handle<MintBlockEvents>(&resource_account),
             burn_block_events: account::new_event_handle<BurnBlockEvents>(&resource_account),
             stack_block_events: account::new_event_handle<StackBlockEvents>(&resource_account),
+            mint_price: 1_000_000, // Set an initial price, adjust as needed
         });
 
         // Create log and plank collection to the resource account
@@ -140,35 +155,48 @@ module movecraft::block {
         );
     }
 
+    // Set mint price by admin: the Cap Object Owner
+    // TODO: delete the object parameter
+    public entry fun set_mint_price(caller: &signer, new_price: u64) acquires State {
+        // Check if the caller is the owner of the PriceCap object
+        assert!(exists<PriceCap>(signer::address_of(caller)), ENOT_SIGNER_NOT_PRICE_CAP_OWNER);
+        let object = object::address_to_object<PriceCap>(signer::address_of(caller));
+        
+        let resource_address = get_resource_address();
+        let state = borrow_global_mut<State>(resource_address);
+        state.mint_price = new_price;
+    }
+
     // Mint block by randomlly type
-    public entry fun mint_to(creator: &signer, to: address) acquires State, Treature {
+    public entry fun mint_to(creator: &signer, to: address) acquires State {
         // Pay for block
-        let treature = borrow_global_mut<Treature>(@movecraft);
-        let coin_payment = coin::withdraw<AptosCoin>(creator, MINT_PRICE);
-        coin::merge(&mut treature.coins, coin_payment);
+        coin::transfer<AptosCoin>(creator, @movecraft, get_mint_price());
+
         // for the mvp, there are 8 types for blocks
         // range from begin to end-1
-        let type = randomness::u64_range(0, 26);
+        let type = randomness::u64_range(0, 22);
         let block_type: u64;
 
         if(type >= 0 && type <= 3) {
+            // 4/22 probability for this type.
             block_type = 0;
-        } else if(type >= 4 && type <= 6) {
+        } else if(type > 3 && type <= 6) {
+            // 4 types of blocks: 3/22 probability each.
             block_type = 1;
-        } else if(type >= 6 && type <= 9) {
+        } else if(type > 6 && type <= 9) {
             block_type = 2;
-        } else if(type >= 9 && type <= 12) {
+        } else if(type > 9 && type <= 12) {
             block_type = 3;
-        } else if(type >= 12 && type <= 15) {
+        } else if(type > 12 && type <= 15) {
             block_type = 4;
-        } else if(type >= 15 && type <= 18) {
+        } else if(type > 15 && type <= 18) {
             block_type = 5;
-        } else if(type >= 18 && type <= 21) {
-            block_type = 5;
-        } else if(type >= 21 && type <= 24) {
+        } else if(type > 18 && type <= 20) {
+            // 1/11 chance to get this block
             block_type = 6;
         } else {
-            block_type = type;
+            // 1/22 chance to get this block
+            block_type = 7;
         };
 
         let block_type_name = string::utf8(block_type::name(block_type));
@@ -260,9 +288,11 @@ module movecraft::block {
 
     // Mint block by randomlly type
     #[randomness]
-    entry fun mint(creator: &signer) acquires State, Treature {
+    entry fun mint(creator: &signer) acquires State {
         mint_to(creator, signer::address_of(creator))
     }
+
+    
 
     // Burn block by owner
     public entry fun burn_block(owner: &signer, block_id: u64) acquires State, Block {
@@ -341,11 +371,6 @@ module movecraft::block {
         burn_block(owner, block_2_id);
     }
 
-    /// Helper functions
-    fun get_resource_address(): address {
-        account::create_resource_address(&@movecraft, STATE_SEED)
-    }
-
     fun get_block_address(blocks: &SimpleMap<u64, address>, owner_address: address, block_id: u64): address {
         assert!(simple_map::contains_key(blocks, &block_id), ENOT_VALID_BLOCK);
         let block_address = *simple_map::borrow(blocks, &block_id);
@@ -368,7 +393,44 @@ module movecraft::block {
         (id, name, type, count, stackable)
     }
 
+
     // Viewer functions
+
+    #[view]
+    public fun get_collection_address(): address {
+        let resource_address = get_resource_address();
+        collection::create_collection_address(&resource_address, &string::utf8(BLOCK_COLLECTION_NAME))
+    }
+
+    #[view]
+    public fun get_resource_address(): address {
+        account::create_resource_address(&@movecraft, STATE_SEED)
+    }
+
+    // get Cap Object Id
+    #[view]
+    public fun get_price_cap_object_id(): address acquires State {
+        let resource_address = get_resource_address();
+        let state = borrow_global<State>(resource_address);
+        state.price_cap_id
+    }
+
+    // get all the cell minted.
+    #[view]
+    public fun get_all_minted_blocks(): (vector<u64>, vector<u64>) acquires State {
+        let resource_address = get_resource_address();
+        let state = borrow_global<State>(resource_address);
+        let (block_types, block_counts) = simple_map::to_vec_pair(state.acc_mint_block_num);
+        (block_types, block_counts)
+    }
+
+    #[view]
+    public fun get_mint_price(): u64 acquires State {
+        let resource_address = get_resource_address();
+        let state = borrow_global<State>(resource_address);
+        state.mint_price
+    }
+    
     #[view]
     public fun get_block_properties_by_obj(block: Object<Block>): (u64, String, u64, u64, bool) {
         let name = token::name(block);
@@ -378,8 +440,6 @@ module movecraft::block {
         let stackable = block_type::is_stackable(type);
         (id, name, type, count, stackable)
     }
-
-
 
     // ==== TESTS ====
     // Setup testing environment

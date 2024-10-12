@@ -18,7 +18,7 @@ dApp for Aptoscraft:
 
 Smart Contract on Randomness Network:
 
-> https://explorer.aptoslabs.com/account/0xd6c5798538b1f92da226d1bebc3a32e510b207237d65bb65427f7db89fcfa0d3/modules/run/capy/generate_capy?network=randomnet
+> https://explorer.aptoslabs.com/account/0xe00f5b874bb0dad513decff803bd934c5881caeb541414bc5a894166f8410dee/modules/run/capy/generate_capy?network=randomnet
 
 Motivation by: 
 
@@ -33,22 +33,22 @@ Try to simulate the block and crafting system in Minecraft through NFT, and show
 
 Minting according to:
 
-> https://explorer.aptoslabs.com/account/0xd6c5798538b1f92da226d1bebc3a32e510b207237d65bb65427f7db89fcfa0d3/modules/run/block/mint?network=randomnet
+> https://explorer.aptoslabs.com/account/0xe00f5b874bb0dad513decff803bd934c5881caeb541414bc5a894166f8410dee/modules/run/block/mint?network=randomnet
 ### Crafting
 
  The Aptoscraft Protocol only provide the function of `stack` and `burn`, the games based on protocol could design the recipe rules by themselves!
 
 Stack Function:
 
-> https://explorer.aptoslabs.com/account/0xd6c5798538b1f92da226d1bebc3a32e510b207237d65bb65427f7db89fcfa0d3/modules/run/block/stack_block?network=randomnet
+> https://explorer.aptoslabs.com/account/0xe00f5b874bb0dad513decff803bd934c5881caeb541414bc5a894166f8410dee/modules/run/block/stack_block?network=randomnet
 
 Burn Function:
 
-> https://explorer.aptoslabs.com/account/0xd6c5798538b1f92da226d1bebc3a32e510b207237d65bb65427f7db89fcfa0d3/modules/run/block/burn_block?network=randomnet
+> https://explorer.aptoslabs.com/account/0xe00f5b874bb0dad513decff803bd934c5881caeb541414bc5a894166f8410dee/modules/run/block/burn_block?network=randomnet
 
 An Example about Recipe:
 
-> https://explorer.aptoslabs.com/account/0xd6c5798538b1f92da226d1bebc3a32e510b207237d65bb65427f7db89fcfa0d3/modules/run/capy/generate_capy?network=randomnet
+> https://explorer.aptoslabs.com/account/0xe00f5b874bb0dad513decff803bd934c5881caeb541414bc5a894166f8410dee/modules/run/capy/generate_capy?network=randomnet
 
 See the more information about Game: 
 
