@@ -8,7 +8,7 @@ import {
 } from "../config/constants";
 import { useWallet } from "@manahippo/aptos-wallet-adapter";
 import { MoveResource } from "@martiandao/aptos-web3-bip44.js/dist/generated";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import React from "react";
 import { Account, Aptos, AptosConfig, Network } from "@aptos-labs/ts-sdk";
 import toast, { LoaderIcon } from "react-hot-toast";
@@ -79,7 +79,8 @@ export default function Home() {
   //     elements_2: Object<Block>) acquires State{
   //      ...
   //     }
-  async function generateCapy() {
+  const generateCapy = useCallback(async () => {
+    console.log("craftTokenIds", craftTokenIds);
     if (craftTokenIds.length < 2) {
       toast.error("You need at least 2 blocks to generate a Capy.");
       return;
@@ -99,8 +100,7 @@ export default function Home() {
         console.error("Error generating Capy:", error);
         toast.error("Failed to generate Capy. Please try again.");
       });
-  }
-
+  }, [craftTokenIds]);
   function doGenerateCapy(object_id_1: string, object_id_2: string) {
     const { name, description } = genCapyInput;
 
@@ -277,10 +277,12 @@ export default function Home() {
         // Determine the capy color and set the preview
         const color = determineCapyColor(newCraft) || "";
         // Update craftTokenIds with the object_id of the selected block
-        setCraftTokenIds((prevTokenIds) => [
-          ...prevTokenIds,
-          selectedBlock.object_id,
-        ]);
+        setCraftTokenIds((prevTokenIds) => {
+          if (!prevTokenIds.includes(selectedBlock.object_id)) {
+            return [...prevTokenIds, selectedBlock.object_id];
+          }
+          return prevTokenIds;
+        });
         console.log("craftTokenIds", craftTokenIds);
 
         console.log("color", color);
