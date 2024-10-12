@@ -89,14 +89,16 @@ export default function Home() {
 
     await signAndSubmitTransaction(doGenerateCapy(object_id_1, object_id_2), {
       gas_unit_price: 100,
-    }).then(() => {
-      toast.success("Capy generated successfully!");
-      loadCapys(); // Refresh the Capy list
-      cleanCraft(); // Clear the craft after successful generation
-    }).catch((error) => {
-      console.error("Error generating Capy:", error);
-      toast.error("Failed to generate Capy. Please try again.");
-    });
+    })
+      .then(() => {
+        toast.success("Capy generated successfully!");
+        loadCapys(); // Refresh the Capy list
+        cleanCraft(); // Clear the craft after successful generation
+      })
+      .catch((error) => {
+        console.error("Error generating Capy:", error);
+        toast.error("Failed to generate Capy. Please try again.");
+      });
   }
 
   function doGenerateCapy(object_id_1: string, object_id_2: string) {
@@ -226,7 +228,7 @@ export default function Home() {
   }, [account]);
 
   // Add this function to determine the capy color based on the craft
-  const determineCapyColor = (craft:Map<number, number>) => {
+  const determineCapyColor = (craft: Map<number, number>) => {
     console.log("craft", craft);
     if (craft.get(0) >= 1 && craft.get(1) >= 1) return "red";
     if (craft.get(2) >= 1 && craft.get(3) >= 1) return "blue";
@@ -256,14 +258,15 @@ export default function Home() {
     if (!selectedBlock) return;
 
     try {
-      let color = '';
       setCraft((prevCraft) => {
         const newCraft = new Map(prevCraft);
         const currentCount = newCraft.get(selectedBlock.type) || 0;
 
         // Check if adding this block would exceed the limit of 2 different types
         if (newCraft.size === 2 && !newCraft.has(Number(selectedBlock.type))) {
-          toast.error("You can only use up to 2 different types of blocks in your craft.");
+          toast.error(
+            "You can only use up to 2 different types of blocks in your craft."
+          );
           return prevCraft;
         }
 
@@ -272,21 +275,24 @@ export default function Home() {
           currentCount + Number(selectedBlock.count)
         );
         // Determine the capy color and set the preview
-      color = determineCapyColor(newCraft) || '';
+        const color = determineCapyColor(newCraft) || "";
+        // Update craftTokenIds with the object_id of the selected block
+        setCraftTokenIds((prevTokenIds) => [
+          ...prevTokenIds,
+          selectedBlock.object_id,
+        ]);
+        console.log("craftTokenIds", craftTokenIds);
+
+        console.log("color", color);
+        const uri = getVoxelUri(color);
+        setCraftPreview(
+          uri
+            ? `https://arweave.net/${uri}`
+            : "https://question-vox.vercel.app/"
+        );
         return newCraft;
       });
       console.log("craft", craft);
-
-      // Update craftTokenIds with the object_id of the selected block
-      setCraftTokenIds((prevTokenIds) => [...prevTokenIds, selectedBlock.object_id]);
-      console.log("craftTokenIds", craftTokenIds);
-
-      
-      console.log("color", color);
-      const uri = getVoxelUri(color);
-      setCraftPreview(
-        uri ? `https://arweave.net/${uri}` : "https://question-vox.vercel.app/"
-      );
     } catch (err) {
       console.error("Failed to add to craft: ", err);
       toast.error("Failed to add to craft.");
