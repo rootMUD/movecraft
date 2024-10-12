@@ -275,9 +275,11 @@ export default function Home() {
       color = determineCapyColor(newCraft) || '';
         return newCraft;
       });
+      console.log("craft", craft);
 
       // Update craftTokenIds with the object_id of the selected block
       setCraftTokenIds((prevTokenIds) => [...prevTokenIds, selectedBlock.object_id]);
+      console.log("craftTokenIds", craftTokenIds);
 
       
       console.log("color", color);
