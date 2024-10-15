@@ -32,7 +32,7 @@ export default function Home() {
     }
   };
 
-  const config = new AptosConfig({ network: Network.TESTNET });
+  const config = new AptosConfig({ network: Network.MAINNET });
   const client = new Aptos(config);
 
   const { account, signAndSubmitTransaction } = useWallet();

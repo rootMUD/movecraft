@@ -18,9 +18,7 @@ export const CapyItem: React.FC<CapyItemProps> = ({
   console.log("capy", capy);
   return (
     <div
-      className={`relative border rounded-lg p-4 cursor-pointer ${
-        selectedCapy?.id === capy.id ? 'border-blue-500' : 'border-gray-300'
-      }`}
+      className={`relative border rounded-lg p-4 cursor-pointer border-blue-500`}
       onClick={() => handleSelect(capy)}
     >
       <span className="text-md font-semibold">{capy.name}</span>

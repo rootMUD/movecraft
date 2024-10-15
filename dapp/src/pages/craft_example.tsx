@@ -10,7 +10,7 @@ import { useWallet } from "@manahippo/aptos-wallet-adapter";
 import { MoveResource } from "@martiandao/aptos-web3-bip44.js/dist/generated";
 import { useState, useEffect, useCallback } from "react";
 import React from "react";
-import { Account, Aptos, AptosConfig, Network } from "@aptos-labs/ts-sdk";
+import { Account, Aptos, AptosConfig, Network, AccountAddressInput } from "@aptos-labs/ts-sdk";
 import toast, { LoaderIcon } from "react-hot-toast";
 import { CapyItem } from "../components/CapyItem";
 import { Block } from "../types/Block";
@@ -18,7 +18,7 @@ import { BlockItem } from "../components/BlockItem";
 import { Capy } from "../types/Capy";
 
 export default function Home() {
-  const config = new AptosConfig({ network: Network.TESTNET });
+  const config = new AptosConfig({ network: Network.MAINNET });
   const client = new Aptos(config);
 
   const { account, signAndSubmitTransaction } = useWallet();
@@ -119,17 +119,11 @@ export default function Home() {
   const handleSelect = (block: Block) => {
     console.log("selected block", block);
     setSelectedBlock(block);
-    if (isStackMode) {
-      if (selectedId != block.id) {
-        handleStackBlock(block.id);
-      }
-    } else {
       if (selectedId != block.id) {
         setSelectedId(block.id);
       } else {
         setSelectedId(undefined);
       }
-    }
   };
 
   const loadBlocks = async () => {
@@ -143,8 +137,8 @@ export default function Home() {
       const collectionAddress = await getCollectionAddr();
 
       const tokens = await client.getAccountOwnedTokensFromCollectionAddress({
-        accountAddress: account.address.toString(),
-        collectionAddress: collectionAddress,
+        accountAddress: account.address as AccountAddressInput,
+        collectionAddress: collectionAddress as AccountAddressInput,
       });
 
       const blocks = tokens.map((t) => {
@@ -365,7 +359,7 @@ export default function Home() {
             <p> * 1 cell #0 + 1 cell #1 = red capy</p>
             <p> * 1 cell #2 + 1 cell #3 = blue capy</p>
             <p> * 1 cell #4 + 1 cell #5 = yellow capy</p>
-            <p> * 2 cell #0 + 1 cell 5 = white capy</p>
+            <p> * 2 cell #0 + 1 cell #5 = white capy</p>
             <br></br>
             <input
               placeholder="Name for your Capy"
