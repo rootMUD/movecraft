@@ -14,7 +14,8 @@ export function NavBar() {
         </a>
         <ul className="menu menu-horizontal p-0 ml-5">
           <NavItem href="/" title="MoveCraft" />
-          <NavItem href="/craft_example" title="Craft Example" />
+          <NavItem href="/craft_example" title="Gen Capy Example" />
+          <NavItem href="/music_example" title="Gen Music Example" />
           <li className="font-sans font-semibold text-lg">
             <a href="https://github.com/rootMUD/aptoscraft" target="_blank">Source Code</a>
             <a href={MODULE_URL} target="_blank">Contract on Explorer</a>

@@ -5,4 +5,5 @@ export type Capy = {
   token_uri: string;
   color: string;
   voxel_uri: string;
+  properties: any;
 };

@@ -1,3 +1,5 @@
+# aptos move compile --package-dir ./movecraft --named-addresses movecraft={addr}
+# aptos move publish --package-dir ./movecraft --named-addresses movecraft={addr} --profile {addr} --max-gas 100000
 [package]
 name = 'movecraft'
 version = '1.0.0'

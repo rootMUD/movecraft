@@ -10,9 +10,15 @@ import { useWallet } from "@manahippo/aptos-wallet-adapter";
 import { MoveResource } from "@martiandao/aptos-web3-bip44.js/dist/generated";
 import { useState, useEffect, useCallback } from "react";
 import React from "react";
-import { Account, Aptos, AptosConfig, Network, AccountAddressInput } from "@aptos-labs/ts-sdk";
+import {
+  Account,
+  Aptos,
+  AptosConfig,
+  Network,
+  AccountAddressInput,
+} from "@aptos-labs/ts-sdk";
 import toast, { LoaderIcon } from "react-hot-toast";
-import { CapyItem } from "../components/CapyItem";
+import { MusicItem } from "../components/MusicItem";
 import { Block } from "../types/Block";
 import { BlockItem } from "../components/BlockItem";
 import { Capy } from "../types/Capy";
@@ -86,31 +92,34 @@ export default function Home() {
   const generateCapy = useCallback(async () => {
     console.log("craftTokenIds", craftTokenIds);
     if (craftTokenIds.length < 2) {
-      toast.error("You need at least 2 blocks to generate a Capy.");
+      toast.error("You need at least 2 blocks to generate a Music NFT.");
       return;
     }
 
     const [object_id_1, object_id_2] = craftTokenIds;
 
-    await signAndSubmitTransaction(doGenerateCapy(object_id_1, object_id_2), {
-      gas_unit_price: 100,
-    })
+    await signAndSubmitTransaction(
+      doGenerateMusicNFT(object_id_1, object_id_2),
+      {
+        gas_unit_price: 100,
+      }
+    )
       .then(() => {
-        toast.success("Capy generated successfully!");
-        loadCapys(); // Refresh the Capy list
+        toast.success("Music NFT generated successfully!");
+        loadMusicNFTs(); // Refresh the Music NFT list
         cleanCraft(); // Clear the craft after successful generation
       })
       .catch((error) => {
-        console.error("Error generating Capy:", error);
-        toast.error("Failed to generate Capy. Please try again.");
+        console.error("Error generating Music NFT:", error);
+        toast.error("Failed to generate Music NFT. Please try again.");
       });
   }, [craftTokenIds]);
-  function doGenerateCapy(object_id_1: string, object_id_2: string) {
+  function doGenerateMusicNFT(object_id_1: string, object_id_2: string) {
     const { name, description } = genCapyInput;
 
     return {
       type: "entry_function_payload",
-      function: DAPP_ADDRESS + "::capy::generate_capy",
+      function: DAPP_ADDRESS + "::music_nft_test::mint_music_nft",
       type_arguments: [],
       arguments: [name, description, object_id_1, object_id_2],
     };
@@ -119,11 +128,11 @@ export default function Home() {
   const handleSelect = (block: Block) => {
     console.log("selected block", block);
     setSelectedBlock(block);
-      if (selectedId != block.id) {
-        setSelectedId(block.id);
-      } else {
-        setSelectedId(undefined);
-      }
+    if (selectedId != block.id) {
+      setSelectedId(block.id);
+    } else {
+      setSelectedId(undefined);
+    }
   };
 
   const loadBlocks = async () => {
@@ -177,7 +186,7 @@ export default function Home() {
 
   async function getCapyCollectionAddr() {
     const payload = {
-      function: DAPP_ADDRESS + `::capy::get_collection_address`,
+      function: DAPP_ADDRESS + `::music_nft_test::get_collection_address`,
       type_arguments: [],
       arguments: [],
     };
@@ -186,7 +195,7 @@ export default function Home() {
     return res[0];
   }
 
-  const loadCapys = async () => {
+  const loadMusicNFTs = async () => {
     if (account && account.address) {
       // try {
       setLoading(true);
@@ -200,7 +209,7 @@ export default function Home() {
         collectionAddress: collectionAddress,
       });
 
-      const capys = tokens.map((t) => {
+      const musicNFTs = tokens.map((t) => {
         const token_data = t.current_token_data;
         const properties = token_data?.token_properties;
         console.log("token_data", token_data);
@@ -212,10 +221,11 @@ export default function Home() {
           token_uri: token_data?.token_uri || "",
           color: properties.color,
           voxel_uri: properties.voxel_uri,
+          properties: properties,
         };
       });
       console.log(tokens);
-      setCapys(capys);
+      setCapys(musicNFTs);
 
       setLoading(false);
     }
@@ -223,7 +233,7 @@ export default function Home() {
 
   useEffect(() => {
     loadBlocks();
-    loadCapys();
+    loadMusicNFTs();
   }, [account]);
 
   // Add this function to determine the capy color based on the craft
@@ -335,7 +345,7 @@ export default function Home() {
         <p>
           <b>Module Path: </b>
           <a target="_blank" href={MODULE_URL} className="underline">
-            {DAPP_ADDRESS}::capy
+            {DAPP_ADDRESS}::music_nft_test
           </a>
         </p>
 
@@ -346,43 +356,19 @@ export default function Home() {
               ꇐ <b>An Example For The Decentralizd Craft!</b> ꇐ
             </h1>
             <br></br>
-            <iframe
-              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-              sandbox="allow-scripts allow-popups-to-escape-sandbox"
-              src="https://arweave.net/Nzxwnihz6LCcwOSp2TzpgJM2uT8yCFOLSGFCOXlmfWE"
-            />
-            <h3>👇 Generate Your Capy by Craft Rules!👇</h3>
+            <img src="https://arweave.net/EgGO7to0lFf3z-I5JlFNHO9Q6XYeh9v3XkE_3c7elcw" />
+            <br></br>
+            <h3>👇 Generate Your Music NFT by Craft Rules!👇</h3>
             <br></br>
             <p>
               <b>📙 The Recipe Book 📙</b>
             </p>
-            <p> * 1 cell #0 + 1 cell #1 = red capy</p>
-            <p> * 1 cell #2 + 1 cell #3 = blue capy</p>
-            <p> * 1 cell #4 + 1 cell #5 = yellow capy</p>
-            <p> * 2 cell #0 + 1 cell #5 = white capy</p>
             <br></br>
-            <input
-              placeholder="Name for your Capy"
-              className="mt-8 p-4 input input-bordered input-primary w-1/2"
-              onChange={(e) =>
-                setGenCapyInput({ ...genCapyInput, name: e.target.value })
-              }
-            />
-            <br></br>
-            <input
-              placeholder="Description for your Capy"
-              className="mt-8 p-4 input input-bordered input-primary w-1/2"
-              onChange={(e) =>
-                setGenCapyInput({
-                  ...genCapyInput,
-                  description: e.target.value,
-                })
-              }
-            />
-            <br></br>
-            <br></br>
-            Selected the cells for generate capy:
-            <br></br>
+            <p> * 1 cell #0 + 1 cell #1 = Music NFT #1</p>
+            <p> * 1 cell #2 + 1 cell #3 = Music NFT #2</p>
+            <p> * 1 cell #4 + 1 cell #5 = Music NFT #3</p>
+            <br></br><br></br>
+            Selected the cells for generate Music NFT:
             <br></br>
             {selectedId && (
               <>
@@ -396,6 +382,30 @@ export default function Home() {
                 <br></br>
               </>
             )}
+            <div className="mt-8">
+              <h3 className="text-xl font-bold mb-4">Current Craft</h3>
+              <div className="w-1/2 mx-auto">
+                {craft.size > 0 ? renderCraft() : <p>No items in craft yet</p>}
+              </div>
+            </div>
+            <input
+              placeholder="Name for your Music NFT"
+              className="mt-8 p-4 input input-bordered input-primary w-1/2"
+              onChange={(e) =>
+                setGenCapyInput({ ...genCapyInput, name: e.target.value })
+              }
+            />
+            <br></br>
+            <input
+              placeholder="Description for your Music NFT"
+              className="mt-8 p-4 input input-bordered input-primary w-1/2"
+              onChange={(e) =>
+                setGenCapyInput({
+                  ...genCapyInput,
+                  description: e.target.value,
+                })
+              }
+            />
             <br></br>
             <br></br>
             <div className="flex gap-4">
@@ -414,32 +424,13 @@ export default function Home() {
               )}
             </div>
             <br></br>
-            <div className="mt-8">
-              <h3 className="text-xl font-bold mb-4">Current Craft</h3>
-              <div className="w-1/2 mx-auto">
-                {craft.size > 0 ? renderCraft() : <p>No items in craft yet</p>}
-              </div>
-
-              <div className="mt-4">
-                <h4 className="text-lg font-semibold mb-2">
-                  👇 Craft Preview 👇
-                </h4>
-                <iframe
-                  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                  sandbox="allow-scripts allow-popups-to-escape-sandbox"
-                  src={craftPreview}
-                  className="w-full h-64"
-                />
-              </div>
-            </div>
-            <br></br>
             <button
               onClick={generateCapy}
               className={
                 "btn btn-primary font-bold mt-4  text-white rounded p-4 shadow-lg"
               }
             >
-              generate Capy by Cells!
+              Generate Music NFT by Cells!
             </button>
             <br></br>
             <br></br>
@@ -450,7 +441,7 @@ export default function Home() {
                 <LoaderIcon className="!w-8 !h-8" />
               ) : (
                 capys.map((capy, idx) => (
-                  <CapyItem
+                  <MusicItem
                     key={idx}
                     capy={capy}
                     selectedCapy={selectedCapy}
@@ -475,7 +466,7 @@ export default function Home() {
                     className="bg-green-500 rounded-md text-white px-4 py-2 hover:bg-green-600"
                     onClick={() => playwithCapy(selectedCapy)}
                   >
-                    Play by this Capy!
+                    Play by this Music NFT!
                   </button>
                 </>
               )}
