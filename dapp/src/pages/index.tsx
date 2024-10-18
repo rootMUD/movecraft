@@ -180,7 +180,7 @@ export default function Home() {
     }
   };
 
-  const handleStackBlock = async (otherBlock: number) => {
+  const handleStackBlock = async (otherBlock: Block) => {
     if (!account) {
       toast.error("You need to connect wallet");
       return;
@@ -191,6 +191,14 @@ export default function Home() {
       return;
     }
 
+    console.log("selected Block", selectedBlock?.type);
+    console.log("otherBlock", otherBlock.type);
+
+    if (selectedBlock?.type !== otherBlock.type) {
+      toast.error("Only blocks of the same type can be stacked ≽^-⩊-^≼~");
+      return;
+    }
+
     const toastId = toast.loading("Stacking block...");
 
     try {
@@ -198,7 +206,7 @@ export default function Home() {
         type: "entry_function_payload",
         function: DAPP_ADDRESS + "::block::stack_block",
         type_arguments: [],
-        arguments: [selectedId, otherBlock],
+        arguments: [selectedId, otherBlock.id],
       };
 
       const tx = await signAndSubmitTransaction(payloads, {
@@ -206,7 +214,7 @@ export default function Home() {
       });
       console.log(tx);
 
-      toast.success("Stacking block successed...", {
+      toast.success("Stacking block succeeded...", {
         id: toastId,
       });
       setSelectedId(undefined);
@@ -223,13 +231,14 @@ export default function Home() {
   };
 
   const handleSelect = (block: Block) => {
-    setSelectedBlock(block);
+    
     if (isStackMode) {
       if (selectedId != block.id) {
-        handleStackBlock(block.id);
+        handleStackBlock(block);
       }
     } else {
       if (selectedId != block.id) {
+        setSelectedBlock(block);
         setSelectedId(block.id);
       } else {
         setSelectedId(undefined);
@@ -239,7 +248,7 @@ export default function Home() {
 
   return (
     <div>
-      {/* TODO:
+      {/* 
      [x] Mint Block with smart contract 
      2/ Stack the block
      3/ Gallery to show the blocks
@@ -260,7 +269,7 @@ export default function Home() {
             </h4>
             <br></br>
             <div className="flex gap-4 items-center justify-center">
-              {/* TODO: bold the YI language */}
+              {/* bold the YI language */}
               {/*const URI: vector<u8> = b"ZSuRY-jNPllbaPAWKLfGUPRv-5_QCP8Rya2sskqfqyc";
               const URI: vector<u8> = b"m2FUu-9_-qFw91eM5ft9N07QyUJzrtiT7lCBhtvU5BA";
               const URI: vector<u8> = b"3z0hO8mspZ7uihEpAVoo7xbOrYIlKYwwtQKFvd0t11s";
@@ -305,7 +314,7 @@ export default function Home() {
             </div>
             <br></br>
             <div className="flex gap-4 items-center justify-center">
-              {/* TODO: list block types */}
+              {/* list block types */}
               <button
                 type="button"
                 className="bg-blue-500 rounded-md text-white px-4 py-2 hover:bg-blue-600"
