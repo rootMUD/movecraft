@@ -408,7 +408,7 @@ export default function Home() {
             />
             <br></br>
             <br></br>
-            <div className="flex gap-4">
+            <div className="flex gap-4 justify-center items-center">
               {isLoading ? (
                 <LoaderIcon className="!w-8 !h-8" />
               ) : (
@@ -436,7 +436,7 @@ export default function Home() {
             <br></br>
             <br></br>
             <br></br>
-            <div className="flex gap-4">
+            <div className="flex gap-4 justify-center items-center">
               {isLoading ? (
                 <LoaderIcon className="!w-8 !h-8" />
               ) : (

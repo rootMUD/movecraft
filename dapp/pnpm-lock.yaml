@@ -41,6 +41,9 @@ importers:
       ethers:
         specifier: ^6.0.8
         version: 6.0.8(bufferutil@4.0.7)(utf-8-validate@5.0.10)
+      heroicons:
+        specifier: ^2.1.5
+        version: 2.1.5
       mime:
         specifier: ^3.0.0
         version: 3.0.0
@@ -62,6 +65,9 @@ importers:
       react-hot-toast:
         specifier: ^2.4.1
         version: 2.4.1(csstype@3.1.2)(react-dom@18.1.0(react@18.1.0))(react@18.1.0)
+      react-icons:
+        specifier: ^5.3.0
+        version: 5.3.0(react@18.1.0)
       react-select:
         specifier: ^5.7.0
         version: 5.7.0(@types/react@18.0.9)(react-dom@18.1.0(react@18.1.0))(react@18.1.0)
@@ -478,28 +484,24 @@ packages:
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [linux]
-    libc: [glibc]
 
   '@next/swc-linux-arm64-musl@12.3.1-canary.0':
     resolution: {integrity: sha512-foWkSsjT0/5Yjkl7YqoUiGAuCFjqK+q4xrnFwpy7jULHwVOn9V7hQfbXVir27XQlBVaDQWe1LbGFoItgVM19Kw==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [linux]
-    libc: [musl]
 
   '@next/swc-linux-x64-gnu@12.3.1-canary.0':
     resolution: {integrity: sha512-uwYt6yPN1LFbo6rzWm9HW0E62Y9RxzCBkKTsktTMZYAMVTdXSVR96oBcDvD2nSMqWdIzXazKa8tr9Ojr15ZPew==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
-    libc: [glibc]
 
   '@next/swc-linux-x64-musl@12.3.1-canary.0':
     resolution: {integrity: sha512-O0hTnB63DBlshNhjrSL+P+Q+uC3rt9+pbNY43s1Zvdpu+rfFacQTrrBwwKM1VCRjAk2pKr+tR8dB5plHA4OgQQ==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
-    libc: [musl]
 
   '@next/swc-win32-arm64-msvc@12.3.1-canary.0':
     resolution: {integrity: sha512-ZYAu87xUwgAt2MZJfemlNizq7f/EFNQCce0PhbwHu6X8s5KHFyRmF+yUfMOGUBIhhg280YCiimPNa18lSK791g==}
@@ -2261,6 +2263,9 @@ packages:
   hash.js@1.1.7:
     resolution: {integrity: sha512-taOaskGt4z4SOANNseOviYDvjEJinIkRgmp7LbKP2YTTmVxWBl87s/uzK9r+44BclBSp2X7K1hqeNfz9JbBeXA==}
 
+  heroicons@2.1.5:
+    resolution: {integrity: sha512-XLq3m45bJphmWdR6im52alaYajp0/fluJa2+7xh3x7CgItumbLsjhKYe+mCf0lErXLy7ZyiEgKIty2gFNxhoyA==}
+
   hmac-drbg@1.0.1:
     resolution: {integrity: sha512-Tti3gMqLdZfhOQY1Mzf/AanLiqh1WTiJgEj26ZuYQ9fbkLomzGchCws4FyrSd4VkpBfiNhaE1On+lOz894jvXg==}
 
@@ -3293,6 +3298,11 @@ packages:
     peerDependencies:
       react: '>=16'
       react-dom: '>=16'
+
+  react-icons@5.3.0:
+    resolution: {integrity: sha512-DnUk8aFbTyQPSkCfF8dbX6kQjXA9DktMeJqfjrg6cK9vwQVMxmcA3BfP4QoiztVmEHtwlTgLFsPuH2NskKT6eg==}
+    peerDependencies:
+      react: '*'
 
   react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
@@ -6697,6 +6707,8 @@ snapshots:
       inherits: 2.0.4
       minimalistic-assert: 1.0.1
 
+  heroicons@2.1.5: {}
+
   hmac-drbg@1.0.1:
     dependencies:
       hash.js: 1.1.7
@@ -7843,6 +7855,10 @@ snapshots:
       react-dom: 18.1.0(react@18.1.0)
     transitivePeerDependencies:
       - csstype
+
+  react-icons@5.3.0(react@18.1.0):
+    dependencies:
+      react: 18.1.0
 
   react-is@16.13.1: {}
 
