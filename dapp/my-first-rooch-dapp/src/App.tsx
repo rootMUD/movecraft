@@ -3,7 +3,7 @@
 // Author: Jason Jo
 
 import { LoadingButton } from "@mui/lab";
-import { Button, Chip, Divider, Stack, Typography, Card, CardContent } from "@mui/material";
+import { Button, Chip, Divider, Stack, Typography, Card, CardContent, TextField, Dialog, DialogTitle, DialogContent, DialogActions } from "@mui/material";
 import { Args, Transaction } from "@roochnetwork/rooch-sdk";
 import {
   UseSignAndExecuteTransaction,
@@ -51,24 +51,29 @@ function App() {
   console.log("all_cells", all_cells);
   let cells: any[] = []; // Initialize an array to store cell details
 
-  all_cells?.forEach(async (cell) => {
-    const decodedValues = await view_cell_by_id(counterAddress, cell.toString());
-    if (decodedValues && decodedValues.length >= 5) {
-      const cellMap = {
-        name: `${decodedValues[0]} ${decodedValues[3]}`,
-        number: decodedValues[2],
-        index: decodedValues[4],
-        creator: decodedValues[1],
-      };
-      cells.push(cellMap); // Append the reorganized map to the cells array
-    }
-  });
+  // all_cells?.forEach(async (cell) => {
+  //   const decodedValues = await view_cell_by_id(counterAddress, cell.toString());
+  //   if (decodedValues && decodedValues.length >= 5) {
+  //     const cellMap = {
+  //       name: `${decodedValues[0]} ${decodedValues[3]}`,
+  //       number: decodedValues[2],
+  //       index: decodedValues[4],
+  //       creator: decodedValues[1],
+  //     };
+  //     cells.push(cellMap); // Append the reorganized map to the cells array
+  //   }
+  // });
 
   console.log("cells", cells);
 
 
   const [sessionLoading, setSessionLoading] = useState(false);
   const [txnLoading, setTxnLoading] = useState(false);
+  const [utxoId, setUtxoId] = useState("");
+  const [cell_id, setCellId] = useState("");
+  const [cell_id_2, setCellId2] = useState("");
+  const [openModal, setOpenModal] = useState(false);
+
   const handlerCreateSessionKey = async () => {
     if (sessionLoading) {
       return;
@@ -223,7 +228,7 @@ function App() {
         alignItems="flex-start"
       >
         <Typography className="text-3xl font-bold">
-          Craft
+          Cell Generator(Staking to Earn)
           <span className="text-base font-normal ml-4">({counterAddress})</span>
         </Typography>
         
@@ -334,8 +339,143 @@ function App() {
               ? "Mint Block Randomly!"
               : "Please create Session Key first"}
           </LoadingButton>
+          <Stack direction="column" spacing={2}>
+            <TextField
+              label="UTXO ID"
+              variant="outlined"
+              fullWidth
+              value={utxoId}
+              onChange={(e) => setUtxoId(e.target.value)}
+              placeholder="Enter your UTXO ID"
+            />
+            <LoadingButton
+              loading={txnLoading}
+              variant="contained"
+              fullWidth
+              disabled={!sessionKey || !utxoId.trim()}
+              onClick={async () => {
+                try {
+                  setTxnLoading(true);
+                  const txn = new Transaction();
+                  txn.callFunction({
+                    address: counterAddress,
+                    module: "blockv6",
+                    function: "stack",
+                    args: [Args.string(utxoId)],
+                  });
+                  await signAndExecuteTransaction({ transaction: txn });
+                  await refetch();
+                } catch (error) {
+                  console.error(String(error));
+                } finally {
+                  setTxnLoading(false);
+                }
+              }}
+            >
+              {sessionKey
+                ? "Staking BTC for Cells Generation..."
+                : "Please create Session Key first"}
+            </LoadingButton>
+            <LoadingButton
+              loading={txnLoading}
+              variant="contained"
+              fullWidth
+              disabled={!sessionKey || !utxoId.trim()}
+              onClick={async () => {
+                try {
+                  setTxnLoading(true);
+                  const txn = new Transaction();
+                  txn.callFunction({
+                    address: counterAddress,
+                    module: "blockv6",
+                    function: "stack",
+                    args: [Args.string(utxoId)],
+                  });
+                  await signAndExecuteTransaction({ transaction: txn });
+                  await refetch();
+                } catch (error) {
+                  console.error(String(error));
+                } finally {
+                  setTxnLoading(false);
+                }
+              }}
+            >
+              {sessionKey
+                ? "Claim my Cells!"
+                : "Please create Session Key first"}
+            </LoadingButton>
+          </Stack>
         </Stack>
       </Stack>
+      <Divider className="w-full !mt-12" />
+      <Stack
+        className="mt-4 w-full font-medium "
+        direction="column"
+        alignItems="flex-start"
+      >
+        <Typography className="text-3xl font-bold">
+          The Craft 
+          <span className="text-base font-normal ml-4">({counterAddress})</span>
+        </Typography>
+        <Stack direction="row" alignItems="center" spacing={2}>
+          <Typography>1</Typography>
+          <img
+            style={{ width: "10%" }}
+            src="https://arweave.net/7xopmyHOuhNtH2UXomaCt8m3FK42EzJ8Fb8MuGtXU58"
+          />
+          <Typography>+ 1 </Typography>
+          <img
+            style={{ width: "10%" }}
+            src="https://arweave.net/vKq1vpQ2gR05Hf9Nn50Ut-0j2BhtOwzBnUxxDNCuTXA"
+          />
+          <Typography> = 👻</Typography> 
+        </Stack>
+        <br></br>
+        <Typography>Try This!</Typography>
+        <br></br>
+        <TextField
+          label="Cell ID"
+          variant="outlined"
+          fullWidth
+          value={cell_id}
+          onChange={(e) => setCellId(e.target.value)}
+          placeholder="Enter your Cell ID"
+        />
+        +
+        <TextField
+          label="Cell ID"
+          variant="outlined"
+          fullWidth
+          value={cell_id_2}
+          onChange={(e) => setCellId2(e.target.value)}
+          placeholder="Enter your Cell ID"
+        />
+        <br></br>
+        <LoadingButton
+          loading={txnLoading}
+          variant="contained"
+          fullWidth
+          disabled={!sessionKey || !cell_id.trim() || !cell_id_2.trim()}
+          onClick={() => setOpenModal(true)}
+        >
+          Generate!
+        </LoadingButton>
+      </Stack>
+
+      <Dialog open={openModal} onClose={() => setOpenModal(false)}>
+        <DialogTitle>Congratulations! 🎉</DialogTitle>
+        <DialogContent>
+          You successfully generated the 👻! You can now use it in the dungeon.
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => window.open('https://dm.rootmud.xyz/#/map-editor?ifGhost=true', '_blank')}>
+            Open Dungeon
+          </Button>
+          <Button onClick={() => setOpenModal(false)}>
+            Close
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Stack>
   );
 }
