@@ -334,11 +334,12 @@ function App() {
               try {
                 setTxnLoading(true);
                 const txn = new Transaction();
+                const randomNum = Math.floor(Math.random() * 8); // Generate random number 0-7
                 txn.callFunction({
                   address: counterAddress,
                   module: "cellsv6",
                   function: "mint_entry_for_testing",
-                  args: [Args.u64(BigInt(1))],
+                  args: [Args.u64(BigInt(randomNum))],
                 });
                 await signAndExecuteTransaction({ transaction: txn });
                 await refetch();
