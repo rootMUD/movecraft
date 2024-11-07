@@ -1,20 +1,25 @@
-# Examples of Aptos dApp Scaffold
+# My First Rooch dApp
 
-A aptos application scaffold based on next.js Tailwind.
+![My First Rooch dApp](image.png)
 
-This project is referenced from:
+[For a complete tutorial, please refer to the official doc.](https://rooch.network/build/getting-started/first-dapp)
 
-> https://github.com/Amovane/aptos-NFT-marketplace
+This template provides the simplest use case for the `@roochnetwork/rooch-sdk-kit`. 
+Through this template, you can learn how to interact with the Rooch chain using the `@roochnetwork/rooch-sdk-kit`, including:
 
-## Start Guide
+1. Connecting a wallet
+2. Creating a session
+3. Fetching on-chain data
+4. Calling contracts with sdk
 
-1. `git clone https://github.com/NonceGeek/scaffold-aptos.git`
-2. `d scaffold-move/scaffold-aptos`
-3. `yarn # Install the necessary front-end packages, pay attention to your local network environment`
-4. Environment configuration, some global variables are in .env.local, which will be injected into the process started by yarn by default. Attention beginners, the testnet faucet url provided by aptos official website cannot be used directly.
-5. `yarn dev`
-6.`yarn build #compiled next.js application`
+### Counter Contract
+In `/counter_contract`, there is a contract that is paired with the DApp for use.
 
-This project contract is based on MoveDID. Project address <https://github.com/NonceGeek/MoveDID>.
 
-This project is maintained by [NonceGeek DAO](https://noncegeek.com/#/).
+### Usage
+
+```bash
+# bun
+bun install
+bun dev 
+```

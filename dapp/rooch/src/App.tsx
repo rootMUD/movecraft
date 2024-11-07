@@ -16,11 +16,11 @@ import {
   useWalletStore,
   useWallets,
 } from "@roochnetwork/rooch-sdk-kit";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import { shortAddress } from "./utils";
 
-import { view_cell_by_id } from "./ViewCell";
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 
 // Publish address of the counter contract
 const counterAddress =
@@ -41,37 +41,29 @@ function App() {
   const { mutateAsync: signAndExecuteTransaction } =
     UseSignAndExecuteTransaction();
   const { data, refetch } = useRoochClientQuery("executeViewFunction", {
+    target: `${counterAddress}::cellsv6::get_all_cells_with_details`,
+  });
+
+  const { data: data2 } = useRoochClientQuery("executeViewFunction", {
     target: `${counterAddress}::cellsv6::get_all_cells`,
   });
 
-  let all_cells = Array.isArray(data?.return_values?.[0]?.decoded_value) 
-    ? data?.return_values?.[0]?.decoded_value 
-    : [];
-
-  console.log("all_cells", all_cells);
-
   const [cells, setCells] = useState<any[]>([]);
 
-  const fetchCells =  useCallback(async () => {
-    all_cells?.forEach(async (cell) => {
-      const decodedValues = await view_cell_by_id(counterAddress, cell.toString());
-    if (decodedValues && decodedValues.length >= 5) {
-      const cellMap = {
-        name: `${decodedValues[0]} ${decodedValues[3]}`,
-        number: decodedValues[2],
-        index: decodedValues[4],
-        creator: decodedValues[1],
-      };
-      setCells([...cells, cellMap]); 
-      }
-    });
-  }, [all_cells]);
-
   useEffect(() => {
-    fetchCells();
-  }, [fetchCells]);
-
-  console.log("cells", cells);
+    if (data?.return_values?.[0]?.decoded_value && data2?.return_values?.[0]?.decoded_value) {
+      const objectIds = data2.return_values[0].decoded_value;
+      const cellDetails = data.return_values[0].decoded_value.map((cell: any, index: number) => ({
+        id: objectIds[index],
+        name: `${cell.value.name}${cell.value.cell_type}`,
+        number: cell.value.block_num,
+        index: cell.value.index,
+        creator: cell.value.creator,
+        type: cell.value.cell_type
+      }));
+      setCells(cellDetails);
+    }
+  }, [data, data2]);
 
 
   const [sessionLoading, setSessionLoading] = useState(false);
@@ -297,25 +289,40 @@ function App() {
           <Typography className="text-xl">
             My Cells:
           </Typography>
-          <Stack direction="row" spacing={2} flexWrap="wrap">
-              {cells.map((cell, index) => (
- 
-              <Card key={index} sx={{ minWidth: 275, margin: 1 }}>
-                <CardContent>
-                  <Typography variant="h5" component="div">
-                    {cell.name}
-                  </Typography>
-                  <Typography color="text.secondary">
-                    Number: {cell.number}
-                  </Typography>
-                  <Typography color="text.secondary">
-                    Index: {cell.index}
-                  </Typography>
-                  <Typography color="text.secondary">
-                    Creator: {cell.creator}
-                  </Typography>
-                </CardContent>
-              </Card>
+          <Stack direction="column" spacing={2}>
+            {Array.from({ length: Math.ceil(cells.length / 4) }).map((_, rowIndex) => (
+              <Stack key={rowIndex} direction="row" spacing={2}>
+                {cells.slice(rowIndex * 4, (rowIndex + 1) * 4).map((cell, index) => (
+                  <Card key={index} sx={{ minWidth: 275, margin: 1 }}>
+                    <CardContent>
+                      <Typography variant="h5" component="div">
+                        {cell.name}
+                      </Typography>
+                      <Typography color="text.secondary">
+                        Number: {cell.number}
+                      </Typography>
+                      <Typography color="text.secondary">
+                        Index: {cell.index}
+                      </Typography>
+                      <Typography 
+                        color="text.secondary" 
+                        sx={{ 
+                          cursor: 'pointer',
+                          '&:hover': { opacity: 0.7 },
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: 1
+                        }}
+                        onClick={() => {
+                          navigator.clipboard.writeText(cell.id);
+                        }}
+                      >
+                        OBJ ID: {shortAddress(cell.id, 4, 4)} <ContentCopyIcon fontSize="small" />
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                ))}
+              </Stack>
             ))}
           </Stack>
           <LoadingButton
