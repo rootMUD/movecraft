@@ -16,7 +16,7 @@ import {
   useWalletStore,
   useWallets,
 } from "@roochnetwork/rooch-sdk-kit";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import "./App.css";
 import { shortAddress } from "./utils";
 
@@ -49,20 +49,27 @@ function App() {
     : [];
 
   console.log("all_cells", all_cells);
-  let cells: any[] = []; // Initialize an array to store cell details
 
-  // all_cells?.forEach(async (cell) => {
-  //   const decodedValues = await view_cell_by_id(counterAddress, cell.toString());
-  //   if (decodedValues && decodedValues.length >= 5) {
-  //     const cellMap = {
-  //       name: `${decodedValues[0]} ${decodedValues[3]}`,
-  //       number: decodedValues[2],
-  //       index: decodedValues[4],
-  //       creator: decodedValues[1],
-  //     };
-  //     cells.push(cellMap); // Append the reorganized map to the cells array
-  //   }
-  // });
+  const [cells, setCells] = useState<any[]>([]);
+
+  const fetchCells =  useCallback(async () => {
+    all_cells?.forEach(async (cell) => {
+      const decodedValues = await view_cell_by_id(counterAddress, cell.toString());
+    if (decodedValues && decodedValues.length >= 5) {
+      const cellMap = {
+        name: `${decodedValues[0]} ${decodedValues[3]}`,
+        number: decodedValues[2],
+        index: decodedValues[4],
+        creator: decodedValues[1],
+      };
+      setCells([...cells, cellMap]); 
+      }
+    });
+  }, [all_cells]);
+
+  useEffect(() => {
+    fetchCells();
+  }, [fetchCells]);
 
   console.log("cells", cells);
 
