@@ -1,4 +1,4 @@
-module movecraft::cellsv5 {
+module movecraft::cellsv6 {
     use std::string::{Self, String};
     use std::vector;
     use moveos_std::display;
@@ -11,7 +11,7 @@ module movecraft::cellsv5 {
     use moveos_std::tx_context::sender;
     use rooch_framework::simple_rng;
 
-    friend movecraft::blocksv5;
+    friend movecraft::blocksv6;
 
     #[test_only]
     use std::option;
@@ -34,6 +34,14 @@ module movecraft::cellsv5 {
         minted_addresses: Table<address,vector<ObjectID>>,
         count: u64,
         all_cells: Table<u64, ObjectID>,
+    }
+
+    struct CellDetails has copy, drop, store {
+        name: String,
+        creator: address,
+        block_num: u64,
+        cell_type: u64,
+        index: u64,
     }
 
     fun init() {
@@ -171,7 +179,7 @@ module movecraft::cellsv5 {
     }
 
     public(friend) fun mint_random(owner: address, block_num: u64){
-        let cell_type = simple_rng::rand_u64_range(0, 8);
+        let cell_type = simple_rng::rand_u64_range(0,8);
         mint(owner, cell_type, block_num);
     }
 
@@ -180,19 +188,26 @@ module movecraft::cellsv5 {
         mint_random(sender(), 1);
     }
 
-    public fun get_all_cells_with_details(): vector<(String, address, u64, u64, u64)> {
+    public fun get_all_cells_with_details(): vector<CellDetails> {
         let global = account::borrow_resource<Config>(@movecraft);
-        let result = vector::empty<(String, address, u64, u64, u64)>();
+        let result = vector::empty<CellDetails>();
         let i = 0;
         while (i < global.count) {
             if (table::contains(&global.all_cells, i)) {
-                vector::push_back(&mut result, view_cell_by_id(*table::borrow(&global.all_cells, i)));
+                let (name, creator, block_num, cell_type, index) = view_cell_by_id(*table::borrow(&global.all_cells, i));
+                vector::push_back(&mut result, CellDetails { 
+                    name, 
+                    creator, 
+                    block_num, 
+                    cell_type, 
+                    index 
+                });
             };
             i = i + 1;
         };
         result
     }
-    
+
     public fun get_all_cells(): vector<ObjectID> {
         let global = account::borrow_resource<Config>(@movecraft);
         let result = vector::empty<ObjectID>();

@@ -51,8 +51,14 @@ function App() {
   const [cells, setCells] = useState<any[]>([]);
 
   useEffect(() => {
-    if (data?.return_values?.[0]?.decoded_value && data2?.return_values?.[0]?.decoded_value) {
+    if (
+      data?.return_values?.[0]?.decoded_value &&
+      Array.isArray(data.return_values[0].decoded_value) &&
+      data2?.return_values?.[0]?.decoded_value &&
+      Array.isArray(data2.return_values[0].decoded_value)
+    ) {
       const objectIds = data2.return_values[0].decoded_value;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const cellDetails = data.return_values[0].decoded_value.map((cell: any, index: number) => ({
         id: objectIds[index],
         name: `${cell.value.name}${cell.value.cell_type}`,
@@ -82,8 +88,8 @@ function App() {
     const defaultScopes = [`${counterAddress}::*::*`];
     createSessionKey(
       {
-        appName: "my_first_rooch_dapp",
-        appUrl: "http://localhost:5173",
+        appName: "movecraft",
+        appUrl: "https://roochcraft.rootmud.xyz/",
         maxInactiveInterval: 1000,
         scopes: defaultScopes,
       },

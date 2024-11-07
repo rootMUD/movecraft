@@ -1,7 +1,7 @@
-module movecraft::blocksv5 {
-    use movecraft::cellsv5;
+module movecraft::blocksv6 {
+    use movecraft::cellsv6;
     use moveos_std::timestamp;
-    use movecraft::cellsv5::Cell;
+    use movecraft::cellsv6::Cell;
 
     use moveos_std::object::{Self, Object};
     use moveos_std::object::ObjectID;
@@ -53,7 +53,7 @@ module movecraft::blocksv5 {
         assert!(stake_info.last_claim_time < now, ErrorAlreadyClaimed);
         let mint_amount = (now - stake_info.last_claim_time) * utxo_value;
         //TODO ensure the mint amount is correct
-        cellsv5::mint_random(owner, mint_amount);
+        cellsv6::mint_random(owner, mint_amount);
         stake_info.last_claim_time = now;
     }
 
@@ -64,31 +64,31 @@ module movecraft::blocksv5 {
 
     /// Stack two blocks together. Both blocks must be of the same type and stackable.
     /// The second block will be burned after stacking.
-    /// rooch move run --function 0xbc16486ec92097459c6ea8c6d7e9d33a3501307423ac8e1d8c572ccff27c2ca3::blocksv5::stack_block --args object:0xa789c896eda005a32023291b5d030cc85004bbaff9f45d968f02d9172e9bed61 --args object:0xeda2aebafb20d2ba3168af0e8c7c70b56795920498013a68e752c7fd7fb8307e
+    /// rooch move run --function 0xbc16486ec92097459c6ea8c6d7e9d33a3501307423ac8e1d8c572ccff27c2ca3::blocksv6::stack_block --args object:0xa789c896eda005a32023291b5d030cc85004bbaff9f45d968f02d9172e9bed61 --args object:0xeda2aebafb20d2ba3168af0e8c7c70b56795920498013a68e752c7fd7fb8307e
     public entry fun stack_block(block1: Object<Cell>, block2: Object<Cell>) {
         // Get properties of both blocks
 
-        let block1_type = cellsv5::type(object::borrow(&block1));
-        let block2_type = cellsv5::type(object::borrow(&block2));
+        let block1_type = cellsv6::type(object::borrow(&block1));
+        let block2_type = cellsv6::type(object::borrow(&block2));
         let owner = object::owner(&block1);
         
         // Validate blocks are of same type
         assert!(block1_type == block2_type, ENOT_TYPEMATCH);
         
         // Get current block counts
-        let block1_count = cellsv5::block_num(object::borrow(&block1));
-        let block2_count = cellsv5::block_num(object::borrow(&block2));
+        let block1_count = cellsv6::block_num(object::borrow(&block1));
+        let block2_count = cellsv6::block_num(object::borrow(&block2));
         
         // Mint new combined block
-        cellsv5::mint(owner, block1_type, block1_count + block2_count);
+        cellsv6::mint(owner, block1_type, block1_count + block2_count);
         
         // Remove the original blocks
-        cellsv5::remove_cell(cellsv5::index(object::borrow(&block1)));
-        cellsv5::remove_cell(cellsv5::index(object::borrow(&block2)));
+        cellsv6::remove_cell(cellsv6::index(object::borrow(&block1)));
+        cellsv6::remove_cell(cellsv6::index(object::borrow(&block2)));
 
         // Burn the original blocks
-        cellsv5::burn(block1);
-        cellsv5::burn(block2);
+        cellsv6::burn(block1);
+        cellsv6::burn(block2);
     }
 
 

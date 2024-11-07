@@ -1,22 +1,28 @@
 # Movecraft
 
-Decentralized Game Craft Protocol written in Move language.
+[Aptos Version](README_APTOS.md)
+
+Decentralized Craft Protocol based on Move language & Bitcoin Staking
 
 Deck:
 
-> [deck](./deck.pdf)
+> [deck](./deck_v2.pdf)
 
 Introduction Video:
 
-> [video](https://youtu.be/fB8_fVEyo1k)
+> [video](https://youtu.be/1LJtGGqrIJU)
 
 Homepage:
 
 > https://move-game-kit.rootmud.xyz
 
-dApp:
+Demo:
 
-> https://craft.rootmud.xyz
+> https://roochcraft.rootmud.xyz
+
+The whitepaper: 
+
+> https://bodhi.wtf/space/5/15427
 
 Motivation by: 
 
@@ -24,18 +30,24 @@ Motivation by:
 
 ## Motivation
 
-Try to simulate the block and crafting system in Minecraft through NFT, and show the combinability of Move NFT.
+Try to simulate the block and crafting system in Minecraft based on the Move & Bitcoin Staking.
 
-## How to play
+<img src="/Users/liaohua/Library/Application Support/typora-user-images/image-20241108074709114.png" alt="image-20241108074709114" style="zoom: 33%;" />
 
-### Minting
+*Portal for Bitcoin Data*
 
-Minting according to:
+<img src="/Users/liaohua/Library/Application Support/typora-user-images/image-20241108074751586.png" alt="image-20241108074751586" style="zoom:33%;" />
 
-> https://explorer.aptoslabs.com/account/0xe00f5b874bb0dad513decff803bd934c5881caeb541414bc5a894166f8410dee/modules/run/block/mint?network=randomnet
-### Crafting
+*Cell Generator*
 
-The Movecraft Protocol only provide the function of `stack` and `burn`, the games based on protocol could design the recipe rules by themselves!
+<img src="/Users/liaohua/Library/Application Support/typora-user-images/image-20241108074814167.png" alt="image-20241108074814167" style="zoom:33%;" />
+
+*Craft Example*
+
+## Technicals
+
+* **Based on Babylon Protocol and Rooch(Bitcoin Layer2) to impl the Bitcoin Staking featue!**
+* **Based on Move features to buidl Protocol & Games!** 
 
 
 ## Roadmap
@@ -45,6 +57,7 @@ The Movecraft Protocol only provide the function of `stack` and `burn`, the game
 - [x] Implement Crafting and Recipe.
 - [x] Implement a simple Web interface.
 - [x] Implement Capy Game Example.
+- [ ] Impl the Bitcoin Staking.
 - [ ] Implement Tools.
 - [ ] Implement the Market. 
 
