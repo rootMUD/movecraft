@@ -32,15 +32,15 @@ Motivation by:
 
 Try to simulate the block and crafting system in Minecraft based on the Move & Bitcoin Staking.
 
-<img src="/Users/liaohua/Library/Application Support/typora-user-images/image-20241108074709114.png" alt="image-20241108074709114" style="zoom: 33%;" />
+<img src="https://p.ipic.vip/pk6dtr.jpg" alt="image-20241108074709114" style="zoom: 33%;" />
 
 *Portal for Bitcoin Data*
 
-<img src="/Users/liaohua/Library/Application Support/typora-user-images/image-20241108074751586.png" alt="image-20241108074751586" style="zoom:33%;" />
+<img src="https://p.ipic.vip/z4amrc.jpg" alt="image-20241108074751586" style="zoom:33%;" />
 
 *Cell Generator*
 
-<img src="/Users/liaohua/Library/Application Support/typora-user-images/image-20241108074814167.png" alt="image-20241108074814167" style="zoom:33%;" />
+<img src="https://p.ipic.vip/ea6tbq.jpg" alt="image-20241108074814167" style="zoom:33%;" />
 
 *Craft Example*
 
